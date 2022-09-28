@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=1200, initial-scale=1.0">
+    <link rel="icon" href="{% static 'icon/fav.svg' %}" type="image/svg">
+    <link rel="stylesheet" href="{% static 'css/home.css' %}">
+    <script src="{% static 'js/home.js' %}"></script>
+    <title>Home</title>
+</head>
+
+<body>
+    {% csrf_token %}
+    <div class="lower-screen-resolution-notify">
+        please open website with minimum resolution of 1366 X 766<br>or<br>use desktop mode
+    </div>
+
+    <div class="navbar" id="navbar">
+        <div class="site-logo-container">
+            <img class="site-logo" src="{% static 'icon/siteLogo1.svg' %}" alt="site logo">
+        </div>
+        <div class="navbar-buttons-container">
+            <a href="/">
+                <div class="navbar-button">Home</div>
+            </a>
+            <a href="#features">
+                <div class="navbar-button">Features</div>
+            </a>
+            <a href="#contactus">
+                <div class="navbar-button">Contact</div>
+            </a>
+            <a href="">
+                <div class="navbar-button">About</div>
+            </a>
+        </div>
+    </div>
+
+    <div class="upbtn-container" id="backtohome">
+        <img class="upbtn" src="{% static 'icon/up.png' %}" alt="dsf">
+    </div>
+
+    <div class="home-page-container" id="home">
+        <div class="home-page-customer-container">
+            <div class="home-page-customer-title">Customer</div>
+            <div class="home-page-customer-desc">We provide a best platform for our customer to get complete their
+                required contact</div>
+            <div class="home-page-customer-start-btn-container">
+                {% if request.user.is_authenticated %}
+                <a href="{% url 'deshboard' %}">
+                    <div class="home-page-customer-start-btn">Deshbord</div>
+                </a>
+                {% else %}
+                <a href="{% url 'login' %}">
+                    <div class="home-page-customer-start-btn">Gatting started</div>
+                </a>
+                {% endif %}
+            </div>
+        </div>
+        <div class="home-page-agent-outer-container">
+            <div class="home-page-agent-inner-container">
+                <div class="home-page-agent-title">Agent</div>
+                <div class="home-page-agent-desc">Worker can get fulfill their requirement by joiningus for helping
+                    customer for better services</div>
+                <div class="home-page-agent-start-container">
+                    {% if user_role == "nouser" %}
+                    <a href="{% url 'login' %}">
+                        <div class="home-page-agent-start">Login</div>
+                    </a>
+                    {% elif user_role == "user" %}
+                    <a href="{% url 'nf' 'This service is temporarily unavailable' %}">
+                        <div class="home-page-agent-start">apply</div>
+                    </a>
+                    {% else %}
+                    <a href="{% url 'workbord' %}">
+                        <div class="home-page-agent-start">Deshbord</div>
+                    </a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="feature-outer-container" id="features">
+        <div class="feature-title">Features We Provides</div>
+        <div class="feature-inner-container">
+            <div class="feature-card">
+                <div class="feature-card-title">Easy Requests</div>
+                <p class="feature-card-desc">Here we provide very easy way to do requests</p>
+                <div class="feature-card-img-box">
+                    <img class="feature-card-img-round" src="{% static 'icon/easy.png' %}" alt="">
+                </div>
+            </div>
+            <div class="feature-card">
+                <div class="feature-card-title">Fast Response</div>
+                <p class="feature-card-desc">processing of customer request is very high by our valuable agents</p>
+                <div class="feature-card-img-box">
+                    <img class="feature-card-img-round" src="{% static 'icon/fast1.png' %}" alt="">
+                </div>
+            </div>
+            <div class="feature-card">
+                <div class="feature-card-title">Constent Updates</div>
+                <p class="feature-card-desc">customer will get constant updates regarding their request status</p>
+                <div class="feature-card-img-box">
+                    <img class="feature-card-img-round" src="{% static 'icon/update.png' %}" alt="">
+                </div>
+            </div>
+            <div class="feature-card">
+                <div class="feature-card-title">Live Contact With Agent</div>
+                <p class="feature-card-desc">customer has all information of agent and one can easy to convers with
+                    then
+                    without intrupts</p>
+                <div class="feature-card-img-box">
+                    <img class="feature-card-img-round" src="{% static 'icon/live.png' %}" alt="">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="request-outer-container">
+        <div class="request-inner-container">
+            <div class="request-detail-container">
+                <div class="request-detail-title">Need to contact someone?</div>
+                <div class="request-detail-desc"> Don't worry here is your personal agent who proceed to compleate
+                    your
+                    tasks as soon as possible </div>
+            </div>
+            <div class="request-btn-container">
+                <div class="request-btn">Getting started</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="contactus-outer-container" id="contactus">
+        <div class="contactus-container">
+            <div class="contactus-detail-container">
+                <div class="contactus-title">
+                    Get In Touch
+                </div>
+                <div class="contactus-text">For any kind of query please fill free and contact us.</div>
+                <div class="contactus-detail-inner-container">
+                    <div class="contactus-icon-container">
+                        <img class="contactus-icon" src="{% static 'icon/call.svg' %}" alt="">
+                    </div>
+                    <div class="contactus-icon-desc">+123465894883</div>
+                </div>
+                <div class="contactus-detail-inner-container">
+                    <div class="contactus-icon-container">
+                        <img class="contactus-icon" src="{% static 'icon/email.svg' %}" alt="">
+                    </div>
+                    <div class="contactus-icon-desc">costomercare@helpfect.com</div>
+                </div>
+                <div class="contactus-detail-inner-container">
+                    <div class="contactus-icon-container">
+                        <img class="contactus-icon" src="{% static 'icon/location.svg' %}" alt="">
+                    </div>
+                    <div class="contactus-icon-desc">888 6th 10001 Oakwood Avenue, New York City, USA</div>
+                </div>
+            </div>
+            <div class="contactus-field-container">
+                <div class="contactus-field-inner-container">
+                    <input type="text" placeholder="First Name" id="contactus_fname" class="contactus-field">
+                    <input type="text" placeholder="Last Name" id="contactus_lname" class="contactus-field">
+                </div>
+                <div class="contactus-field-inner-container">
+                    <input type="email" placeholder="Email Address" id="contactus_email" class="contactus-field">
+                    <input type="text" placeholder="Mobile Number" id="contactus_mobile" class="contactus-field">
+                </div>
+                <textarea type="text" placeholder="Message.." id="contactus_message" class="contactus-field-message"></textarea>
+                <div class="contactus-submit-btn" id="contactus_submit">
+                    Submit
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer-container">
+        <div class="footer-inner-container">
+            <img class="footer-site-logo" src="{% static 'icon/siteLogo1.svg' %}" alt="site logo">
+            <div class="footer-outer-icon-container">
+                <div class="footer-inner-icon-container"><img class="footer-icon" src="{% static 'icon/facebook.png' %}"
+                        alt=""></div>
+                <div class="footer-inner-icon-container"><img class="footer-icon" src="{% static 'icon/insta.png' %}"
+                        alt=""></div>
+                <div class="footer-inner-icon-container"><img class="footer-icon" src="{% static 'icon/twitter.png' %}"
+                        alt=""></div>
+                <div class="footer-inner-icon-container"><img class="footer-icon" src="{% static 'icon/skype.png' %}"
+                        alt=""></div>
+            </div>
+            <div class="navbar-buttons-container">
+                <a href="#home">
+                    <div class="navbar-button">Home</div>
+                </a>
+                <a href="#features">
+                    <div class="navbar-button">Features</div>
+                </a>
+                <a href="#contactus">
+                    <div class="navbar-button">Contact</div>
+                </a>
+                <a href="">
+                    <div class="navbar-button">About</div>
+                </a>
+            </div>
+            <div class="tandcbox">Terms & Conditions</div>
+        </div>
+
+    </div>
+
+    <div class="noti-overlay" id="notificationbx">
+        <div class="notification-box" id="notif_name">
+            message 
+        </div>
+    </div>
+</body>
+
+</html>

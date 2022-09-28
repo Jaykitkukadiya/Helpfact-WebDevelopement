@@ -1,0 +1,6 @@
+python manage.py rename old_project new new_project  # for rename a project #full artical : https://stackoverflow.com/questions/53024807/changing-a-project-name-in-django
+
+name : live remote connection
+
+
+python 7.9 required to run website

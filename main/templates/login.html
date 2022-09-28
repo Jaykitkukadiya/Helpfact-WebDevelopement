@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>login</title>
+    <link rel="stylesheet" href="{% static 'css/login.css' %}">
+    <link rel="icon" href="{% static 'icon/fav.svg' %}" type="image/svg">
+    <script src="{% static 'js/login.js' %}"></script>
+</head>
+
+<body>
+    {% csrf_token %}
+
+    <div class="lower-screen-resolution-notify">
+        please open website with minimum resolution of 1366 X 766<br>or<br>use desktop mode
+    </div>
+
+    <div class="navbar" id="navbar">
+        <div class="site-logo-container">
+            <img class="site-logo" src="{% static 'icon/siteLogo1.svg' %}" alt="site logo">
+        </div>
+        <div class="navbar-buttons-container">
+            <a href="/">
+                <div class="navbar-button">Home</div>
+            </a>
+            <a href="/#features">
+                <div class="navbar-button">Features</div>
+            </a>
+            <a href="/#contactus">
+                <div class="navbar-button">Contact</div>
+            </a>
+            <a href="">
+                <div class="navbar-button">About</div>
+            </a>
+        </div>
+    </div>
+
+    <div class="login_outer_container">
+        <!-- <div class="login_inner_container" id="login_box">
+            <h1 class="login_header">login</h1>
+            <div class="login_field_outer_container">
+                <div class="field_container">
+                    <div class="lable_container">
+                        username :
+                    </div>
+                    <div class="detail_container">
+                        <input type="text" class="fields" id="username" >
+                    </div>
+                </div>
+                <div class="field_container">
+                    <div class="lable_container">
+                        password :
+                    </div>
+                    <div class="detail_container">
+                        <input type="password" class="fields" id="password" >
+                    </div>
+                </div>
+            </div>
+            <div class="btn_container">
+                <div class="btn" id="login_btn">continue</div>
+                <div id="signup_go_btn" style="color:white;">signup</div>
+            </div>
+        </div> -->
+        <div class="login-outer-container" id="login_box" style="display: flex;">
+            <div class="login-card">
+                <div class="login-card-title">Login</div>
+                <div class="login-field-container">
+                    <input type="text" id="username" placeholder="User Name" class="login-field">
+                    <input type="password" id="password" placeholder="Password" class="login-field">
+                    <div class="accept-tandc-container">
+                        <input id="tandcbx_login" type="checkbox" class="chkbtn" unchecked>
+                        <div class="accept-tandc-text">
+                            Accept Terms & Conditions
+                        </div>
+                    </div>
+                    <div class="login-btn" id="login_btn" >Submit</div>
+                </div>
+                <div class="create-or-forgot-container">
+                    <div class="forgot-btn" id="forgot_box_btn" >Forgot Password?</div>
+                    <div class="signup-btn" id="signup_go_btn">&nbsp;|&nbsp; Create a new account.</div>
+                </div>
+                <div class="see-tandc"><a href="">Terms and Condition</a></div>
+            </div>
+        </div>
+
+        <div class="login-outer-container" id="forgot_box" style="display: none;">
+            <div class="login-card">
+                <div class="login-card-title">Reset Password</div>
+                <div class="login-field-container">
+                    <input type="text" id="reset_mail" placeholder="Email" class="login-field">
+                    <div class="signup-btn-container">
+                        <div class="login-btn" id="reset_mail_btn" >Reset</div>
+                        <div class="login-btn" id="reset_cancel_btn" >Cancel</div>
+                    </div>
+                    <div class="accept-tandc-container">
+                        <div class="accept-tandc-text">
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="login-outer-container" id="signup_box" style="display: none;">
+            <div class="login-card">
+                <div class="login-card-title">Signup</div>
+                <div class="login-field-container">
+                    <div class="signup-field-inner-container">
+                        <input type="text" id="signup_fname" placeholder="First Name" class="login-half-field">
+                        <input type="text" id="signup_lname" placeholder="Last Name" class="login-half-field">
+                    </div>
+                    <div class="signup-field-inner-container">
+                        <input type="email" id="signup_email" placeholder="Email Address" class="login-half-field">
+                        <input type="text" id="signup_mobile" placeholder="Mobile Number" class="login-half-field">
+                    </div>
+                    <input type="text" id="signup_username" placeholder="User Name" style="height:30px; margin: 5px 0px;" class="login-field">
+                    <input type="password" id="signup_password" placeholder="Password" style="height:30px; margin: 5px 0px;" class="login-field">
+                    <textarea type="text" placeholder="address.." id="signup_address" class="signup-field-address"></textarea>
+                    <input type="text" id="signup_pincode" placeholder="pincode" style="height:30px; margin: 5px 0px;" class="login-field">
+                    <div class="accept-tandc-container">
+                        <input id="tandcbx_signup" type="checkbox" class="chkbtn" unchecked>
+                        <div class="accept-tandc-text">
+                            Accept Terms & Conditions
+                        </div>
+                    </div>
+                    <div class="signup-btn-container">
+                        <div class="login-btn" id="signup_btn" >Submit</div>
+                        <div class="login-btn" id="login_go_btn" >Cancel</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- <div class="login_inner_container" id="signup_box" style="display: none;">
+            <h1 class="login_header">signup</h1>
+            <div class="login_field_outer_container">
+                <div class="signup_field_container">
+                    <div class="lable_container">
+                        username
+                    </div>
+                    <div class="detail_container">
+                        :<input type="text" class="fields" id="signup_username">
+                    </div>
+                </div>
+                <div class="signup_field_container">
+                    <div class="lable_container">
+                        password
+                    </div>
+                    <div class="detail_container">
+                        :<input type="password" class="fields" id="signup_password">
+                    </div>
+                </div>
+                <div class="signup_field_container">
+                    <div class="lable_container">
+                        email
+                    </div>
+                    <div class="detail_container">
+                        :<input type="email" class="fields" id="signup_email">
+                    </div>
+                </div>
+                <div class="signup_field_container">
+                    <div class="lable_container">
+                        mobile
+                    </div>
+                    <div class="detail_container">
+                        :<input type="number" maxlength=1000000000 class="fields" id="signup_mobile">
+                    </div>
+                </div>
+                <div class="signup_field_container">
+                    <div class="lable_container">
+                        address
+                    </div>
+                    <div class="detail_container">
+                        :<input type="text" class="fields" id="signup_address">
+                    </div>
+                </div>
+                <div class="signup_field_container">
+                    <div class="lable_container">
+                        pincode
+                    </div>
+                    <div class="detail_container">
+                        :<input type="text" class="fields" id="signup_pincode">
+                    </div>
+                </div>
+                <div class="signup_field_container">
+                    <div class="lable_container">
+                        xender
+                    </div>
+                    <div>:
+                        <label for="male" style="color: white;">male</label>
+                        <input type="radio" name="xender" value="Male" id="signup_xender">
+                        <label for="female" style="color: white;">female</label>
+                        <input type="radio" name="xender" value="Female" id="signup_xender">
+                    </div>
+                </div>
+                <div class="signup_field_container">
+                    <div class="lable_container">
+                        role
+                    </div>
+                    <div>:
+                        <label for="user" style="color: white;">user</label>
+                        <input type="radio" name="role" checked value="user" id="signup_role">
+                        <label for="agent" style="color: white;">agent</label>
+                        <input type="radio" name="role" value="agent" id="signup_role">
+                    </div>
+                </div>
+            </div>
+            <div class="btn_container">
+                <div class="btn" id="signup_btn">continue</div>
+                <div id="login_go_btn" style="color: white;">login</div>
+            </div>
+        </div> -->
+    </div>
+
+
+    <div class="noti-overlay" id="notificationbx">
+        <div class="notification-box" id="notif_name">
+            I am notification.
+        </div>
+    </div>
+
+</body>
+
+</html>

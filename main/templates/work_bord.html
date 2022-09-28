@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>workbord</title>
+
+    <link rel="stylesheet" href="{% static 'css/work_bord.css' %}">
+    <script>
+        more_image = '{% static "icon/more.png" %}';
+        console.log(more_image);
+    </script>
+    <script src="{% static 'js/work_bord.js' %}"></script>
+</head>
+
+<body style="background: url({% static 'photos/background.webp' %}) no-repeat center center / cover;">
+    {% csrf_token %}
+
+    <div class="overlay" id="pageloader" style="display:block; background-color:white ;">
+        <div class="message_box" style="height: 144px;width: 302px;">
+            <div
+                style="display: flex;justify-content: center; align-items: center; height: inherit; flex-direction: column;">
+                <div style="display: flex;justify-content: center; align-items: center;height: 80px;">
+                    <div class="divanim" style="border-color: red;"></div>
+                    <div class="divanim1" style="border-color: rgb(74, 218, 17);"></div>
+                    <div class="divanim2" style="border-color: rgb(0, 4, 255);"></div>
+                    <div class="divanim" style="border-color: rgb(255, 0, 242);"></div>
+                    <div class="divanim1" style="border-color: rgb(12, 255, 122);"></div>
+                </div>
+                <div class="messagebox_loading" id="loader_message">
+                    page loading..
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="boddy" style="display: none;">
+
+        <div class="nav" style="position: static;">
+            <div class="nav_btn_container">
+                <a href="{% url 'home' %}">
+                    <div class="nav_btn">home</div>
+                </a>
+                {% if request.user.is_anonymous %}
+                <a href="{% url 'login' %}">
+                    <div class="nav_btn">login</div>
+                </a>
+                {% else %}
+                <div class="nav_btn" id="logout_btn">logout</div>
+                {% endif %}
+
+            </div>
+        </div>
+
+
+        <div class="side_container">
+            <div class="pending_task_container">
+                <div class="btn_container">
+                    <h3>pending Task</h3>
+                </div>
+
+                <div class="task_heading">
+                    <div style="min-width: 80px ; width: 80px ; text-align: center ; margin: 5px 0px;">image</div>
+                    <div class="task_denoter_detail_container">
+                        <div style="min-width: 100px ; width: 30% ; text-align: center ; margin: 5px 0px;">name</div>
+                        <div style="min-width: 66px ; width: 27% ; text-align: center ; margin: 5px 0px;">mobile number
+                        </div>
+                        <div style="min-width: 33px ; width:27% ; text-align: center ; margin: 5px 0px;">time remaining
+                        </div>
+                        <div style="min-width: 33px ; width:15% ; text-align: center ; margin: 5px 0px;">More
+                        </div>
+                    </div>
+                </div>
+
+                <div style="overflow-y: auto; height:454px;" id="accepted_pending_task_container">
+                    {% for com_task in pand_accepted_obj %}
+                    <div class="task_denoter_container" id="pending_task_{{com_task.id}}">
+                        <a href="/media/{{com_task.task_detail_link.image}}"><img
+                                src="/media/{{com_task.task_detail_link.image}}" alt="" class="task_denoter_image"></a>
+                        <div class="task_denoter_detail_container">
+                            <div class="task_denoter_name">{{com_task.task_detail_link.name}}</div>
+                            <div class="task_denoter_pay_status">{{com_task.task_detail_link.mobile_number}}</div>
+                            <div class="task_denoter_time_remain" id="pending_deadline_{{com_task.id}}">initilizing...
+                            </div>
+                            <div class="more_btn_container" id="more_{{com_task.id}}"><img
+                                    style="width: 30px; height: 30px;" src="{% static 'icon/more.png' %}" alt=""></div>
+                        </div>
+                    </div>
+                    <script>
+
+                        more_ids.push({{ com_task.id }});
+                        addeventmore(more_ids);
+                        var pending_deadline_{{ com_task.id }} = new Date({{ com_task.task_detail_link.deadline }}) - Date.now();
+                        pending_deadline_{{ com_task.id }} /= 1000;
+                        var pending_timer_{{ com_task.id }} =  setInterval(function () { // execute code each second
+                            pending_deadline_{{ com_task.id }} --;
+                            let hours = component(pending_deadline_{{ com_task.id }}, 60 * 60); // hours
+                        let minutes = component(pending_deadline_{{ com_task.id }}, 60) % 60; // minutes
+                        let seconds = component(pending_deadline_{{ com_task.id }}, 1) % 60; // seconds
+
+                        if (hours <= 0 && minutes <= 0 && seconds <= 0) {
+                            document.getElementById("pending_deadline_" + {{ com_task.id }}).innerText = `expired..`;
+                        clearInterval(pending_timer_{{ com_task.id }});
+                    }
+                    else
+                        {
+                            document.getElementById(`pending_deadline_{{com_task.id}}`).innerText = `${hours}:${minutes}:${seconds}`;
+                        }
+                    } , 1000 );
+                        interval_var['pending_timer_{{ com_task.id }}'] = pending_deadline_{{ com_task.id }};
+                    </script>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="notification_outer_container">
+                <div class="btn_container">
+                    <h3>Notification</h3>
+                </div>
+
+                <div class="task_heading" style="border-bottom: 2px solid rgb(255, 255,255,0.707);">
+                    <div class="task_denoter_detail_container" style="width: 100%; ">
+                    </div>
+                </div>
+
+
+                <div class="notification_inner_container" id="noti_container">
+
+                    {% for task in pand_obj %}
+                    <div class="notification_container" id="noti_{{task.id}}">
+                        <div class="notification_image_container">
+                            <a href="/media/{{task.task_detail_link.image}}"><img class="notification_image"
+                                    src="/media/{{task.task_detail_link.image}}" alt="no image"></a>
+                        </div>
+                        <div class="notification_detail_container">
+                            <div style="display: flex; justify-content:space-between">
+                                <div class="notfication_name">{{task.task_detail_link.name}}</div>
+                                <div class="notfication_deadline" id="noti_deadline_{{task.id}}">deadline</div>
+                                <div id="noti_deadline_number{{task.id}}" style="display: none;">{{
+                                    task.task_detail_link.deadline }}</div>
+                            </div>
+                            <div class="notification_address">{{task.task_detail_link.address}} -
+                                {{task.task_detail_link.pincode}}</div>
+                            <div class="notification_btn_container">
+                                <button class="notification_btn" onclick="accept_task({{task.id}})">Accept</button>
+                                <a target="_blank" href="" id="noti_gmap_{{task.id}}">
+                                    <div class="notification_btn">G-link</div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <script>
+                        noti_ids.push({{ task.id }});
+                        addeventdeadline(noti_ids);
+                        document.getElementById("noti_gmap_{{task.id}}").href = `https://www.google.com/maps/dir/?api=1&origin=Current+Location&destination=${JSON.parse('{{task.task_detail_link.gmaplink | safe}}').lat},${JSON.parse('{{task.task_detail_link.gmaplink | safe}}').lng}&output=embed`;
+                        console.log(noti_ids);
+                    </script>
+                    {% endfor %}
+
+                </div>
+
+
+            </div>
+        </div>
+
+
+
+
+
+        <div class="overlay" id="loading_box">
+            <div class="message_box" style="height: 144px;width: 302px;">
+                <div
+                    style="display: flex;justify-content: center; align-items: center; height: inherit; flex-direction: column;">
+                    <div style="display: flex;justify-content: center; align-items: center;height: 80px;">
+                        <div class="divanim" style="border-color: red;"></div>
+                        <div class="divanim1" style="border-color: rgb(74, 218, 17);"></div>
+                        <div class="divanim2" style="border-color: rgb(0, 4, 255);"></div>
+                        <div class="divanim" style="border-color: rgb(255, 0, 242);"></div>
+                        <div class="divanim1" style="border-color: rgb(12, 255, 122);"></div>
+                    </div>
+                    <div class="messagebox_loading">
+                        loading..
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="overlay" id="success_box">
+            <div class="message_box" style="height: 144px;width: 302px;">
+                <div
+                    style="display: flex;justify-content: center; align-items: center; height: inherit; flex-direction: column;">
+                    <div
+                        style="display: flex;justify-content: center; align-items: flex-end;height: 80px; margin: 5px 0px;">
+                        <div
+                            style="border-radius: 5px 5px 0px 5px; border: 9px solid black; padding: 0px 0px;height: 20px ;">
+                        </div>
+                        <div
+                            style="border-radius: 0px 5px 0px 0px;  border: 9px solid black; padding: 0px 0px;height:5px ;">
+                        </div>
+                        <div
+                            style="border-radius: 5px 0px 0px 0px;  border: 9px solid black; padding: 0px 0px;height: 10px;">
+                        </div>
+                        <div
+                            style="border-radius: 5px 0px 0px 0px;  border: 9px solid black; padding: 0px 0px; height: 20px;">
+                        </div>
+                        <div
+                            style="border-radius: 5px 5px 5px 0px;  border: 9px solid black; padding: 0px 0px;height: 30px;">
+                        </div>
+                    </div>
+                    <div class="messagebox_loading" id="success_message">
+                        woo hoo..
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="overlay" id="messsage_box" style="z-index: 10;">
+            <div class="message_box" style="height: 144px;width: 302px;">
+                <div style="display: flex;justify-content: center; align-items: center; height: inherit; flex-direction: column;"
+                    id="message_text">
+                </div>
+            </div>
+        </div>
+        <div class="overlay" id="compleate_otp_box" style="z-index: 4;">
+            <div class="message_box" style="height: 144px;width: 302px;">
+                <div style="display: flex; height :100%;justify-content: space-around; padding: 10px; align-items: center; height: inherit; flex-direction: column;"
+                    id="message_text">
+                    <p id="pending_id"></p>
+                    <input type="text" id="complete_otp">
+                    <div class="add_btn_container">
+                        <div class="btn" id="complete_task_otp_btn" style="display: none;">complete task</div>
+                        <div class="btn" id="accept_task_btn" style="display: none;">accept task</div>
+                        <div id="complete_otp_exit" style="color: black;"><u>exit</u></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="overlay" id="more_box" style="z-index: 0;">
+            <div class="message_box" id="inner_message_box"
+                style="height: auto;width: auto; padding: 15px; max-height: 90vh; overflow-y: auto;">
+                <div style="height: inherit; flex-direction: column;">
+                    <div class="more_container">
+                        <div class="add_btn_container">
+                            <h3 style="color: black;">Detailes</h3>
+                        </div>
+                        <div id="more_task_id"></div>
+                        <div class="add_field_container">
+                            <div class="add_lable_container">
+                                name :
+                            </div>
+                            <div class="add_input_container" id="more_name">
+                                kjhk
+                            </div>
+                        </div>
+                        <div class="add_field_container">
+                            <div class="add_lable_container">
+                                image :
+                            </div>
+                            <div class="add_input_container">
+                                <a href="#" id="more_image">profile image</a>
+                            </div>
+                        </div>
+                        <div class="add_field_container">
+                            <div class="add_lable_container">
+                                address :
+                            </div>
+                            <div class="add_input_container" id="more_address">
+                                kjhk
+                            </div>
+                        </div>
+                        <div class="add_field_container">
+                            <div class="add_lable_container">
+                                google map :
+                            </div>
+                            <div class="add_input_container">
+                                <a href="#" target="_blank" id="more_gmaplink">goto map</a>
+                            </div>
+                        </div>
+                        <div class="add_field_container">
+                            <div class="add_lable_container">
+                                pincode :
+                            </div>
+                            <div class="add_input_container" id="more_pincode">
+                                kjhk
+                            </div>
+                        </div>
+                        <div class="add_field_container">
+                            <div class="add_lable_container">
+                                mobile number:
+                            </div>
+                            <div class="add_input_container" id="more_mobile_number">
+                                kjhk
+                            </div>
+                        </div>
+                        <div class="add_field_container">
+                            <div class="add_lable_container">
+                                due date :
+                            </div>
+                            <div class="add_input_container" id="more_deadline">
+                                kjhk
+                            </div>
+                        </div>
+                        <div class="add_field_container">
+                            <div class="add_lable_container">
+                                note :
+                            </div>
+                            <div class="add_input_container more_note" id="more_note">
+                                kjhkeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
+                                eeeeeeeeeeeeeeeeeeeeeeeeeeeeeee eeeeeeeeeeeeeeeeeeeeeeeeeeee
+                                eeeeeeeeeeeeeeeeeeeeeeeeeeeeee
+                                eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
+                                eeeeeeeeeeeeeeeeeeeeee
+                            </div>
+                        </div>
+                        <div class="add_field_container">
+                            <div class="add_lable_container">
+                                proof :
+                            </div>
+                            <div class="add_input_container">
+                                <a href="#" id="more_proof">click hear</a>
+                            </div>
+                        </div>
+                        <div class="add_field_container">
+                            <div class="add_lable_container">
+                                documents :
+                            </div>
+                            <div class="add_input_container">
+                                <a href="#" id="more_document">click hear</a>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div style="width: 100%;" id="user_details">
+                        <div style="display: flex; justify-content: end;">
+                            <p>user_details</p>
+                        </div>
+                        <div class="more_container">
+                            <div class="add_field_container">
+                                <div class="add_lable_container">
+                                    image :
+                                </div>
+                                <div class="add_input_container">
+                                    <a href="" id="more_user_image">click hear</a>
+                                </div>
+                            </div>
+                            <div class="add_field_container">
+                                <div class="add_lable_container">
+                                    name :
+                                </div>
+                                <div class="add_input_container" id="more_user_name">
+                                    kjhk
+                                </div>
+                            </div>
+                            <div class="add_field_container">
+                                <div class="add_lable_container">
+                                    mobile :
+                                </div>
+                                <div class="add_input_container" id="more_user_mobile">
+                                    kjhk
+                                </div>
+                            </div>
+                            <div class="add_field_container">
+                                <div class="add_lable_container">
+                                    xender :
+                                </div>
+                                <div class="add_input_container" id="more_user_xender">
+                                    kjhk
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="add_btn_container">
+                        <div class="btn" id="complete_task_btn">complete task</div>
+                        <div id="more_exit" style="color: black;"><u>exit</u></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,382 @@
+body{
+    margin:0px;
+    position:relative;
+    font-family: system-ui;
+}
+
+a
+{
+    text-decoration: none;
+}
+
+
+.side_container
+{
+    display: flex;
+}
+
+.pending_task_container
+{
+    width:70%;
+    margin:10px;
+    height: 544px;
+}
+
+.notification_outer_container
+{
+    width: 30%;
+    min-width:260px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 5px;
+    background-color:rgba(0, 0, 0, 0.72);
+}
+
+.btn_container
+{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color:white;
+}
+
+.notification_inner_container
+{
+    width: 100%;
+    overflow: auto;
+    max-height: calc(100vh - 131px);
+    display: flex;
+    flex-direction: column-reverse;
+}
+
+.notification_container
+{
+    display:flex;
+    width: 100%;
+    margin: 5px 0px ;
+    background-color: rgba(255, 255, 255, 0.693);
+}
+
+.notification_image_container
+{
+    width:30%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.notification_image
+{
+    width:70px;
+    height:70px;
+    border-radius: 5px;
+}
+
+.notification_detail_container
+{
+    width: 70%;
+    min-width: 185px;
+}
+
+.notfication_name
+{
+    margin:5px 0px;
+    width:50%;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;  
+    overflow: hidden;
+    
+}
+
+.notfication_deadline
+{
+    margin:5px 0px;
+    width:50%;
+
+}
+
+.notification_address
+{
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;  
+    overflow: hidden;
+    margin:5px 0px;
+    padding-right: 20px;
+}
+
+.notification_btn_container
+{
+    display: flex;
+    justify-content:center;
+    align-items: center;
+    margin:5px 0px;
+    flex-wrap: wrap;
+
+}
+
+.notification_btn
+{
+    background-color: black;
+    color: white;
+    font-size: small;
+    padding: 4px 20px;
+    margin: 5px 0px;
+    margin-right: 10px;
+    border-radius: 5px;
+}
+
+
+
+
+.task_denoter_container
+{
+    display: flex;
+    background-color: rgb(0, 0, 0 , 0.707);
+    color: white;
+}
+.task_denoter_container
+{
+    
+    margin:10px 0px;
+}
+.task_heading
+{
+    display:flex;
+    border-bottom: 2px solid rgb(0, 0, 0 , 0.707);
+    width: 100%;
+    margin: 5px 0px;
+    color: White;
+}
+.task_denoter_image
+{
+    width: 50px;
+    height: 50px;
+    border-radius: 50px;
+    margin: 15px;
+}
+.task_denoter_detail_container
+{
+    width: calc(100%  - 80px);
+    display: flex;
+}
+.task_denoter_name
+{
+    
+    width: 30%;
+    min-width: 100px;
+    line-height:80px;
+    text-align: center;
+}
+.task_denoter_pay_status
+{
+    min-width: 89px;
+    width: 27%;
+    line-height:80px;
+    text-align: center;
+    
+}
+.task_denoter_task_status
+{
+    min-width: 66px;
+    width: 20%;
+    line-height:80px;
+    text-align: center;
+    
+}
+.btn
+{
+    padding: 5px 40px;
+    background-color:black;
+    color:white;
+    width: auto;
+}
+.task_denoter_time_remain
+{
+    min-width: 100px;
+    width: 27%;
+    line-height:80px;
+    text-align: center;
+    
+}
+
+.more_btn_container
+{
+    min-width: 100px;
+    width: 16%;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    background-color:rgb(255, 123, 0);
+    
+}
+
+
+.add_field_container
+{
+    display: flex;
+    width: 100%;
+    margin: 10px 0px;
+}
+.add_lable_container
+{
+    width: 32%;
+}
+
+
+.add_input_container
+{
+    width: calc(68% - 10px);
+    max-width: calc(68% - 10px);
+    text-overflow: wrap;
+}
+
+.more_note
+{
+    max-height: 100px;
+    overflow: auto;
+}
+
+.more_container
+{
+    min-width:400px;
+    min-height: 400px;
+    padding: 5px 15px;
+    background-color: rgb(233, 233, 233);
+}
+.add_btn_container
+{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    padding:10px;
+    align-items: center;
+    width: calc(100% - 20px);
+}
+
+
+
+
+/* ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
+.nav
+{
+    width: 100%;
+    top: 0px;
+    left: 0px;
+    position: absolute;
+    height:50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color:rgb(0, 0, 0 , 0.707)
+}
+
+.nav_btn_container
+{
+    min-width: 50%;
+    max-width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.nav_btn
+{
+    padding: 5px 40px;
+    /* background-color:black; */
+    color:rgb(255, 255, 255);
+    width: auto;
+    
+}
+
+.nav_btn:hover
+{
+    background-color: rgba(0, 0, 0, 0.754);
+    color:white;
+    border-radius:4px;
+}
+
+
+.divanim {
+    border: 1px solid black;
+    height: 10px;
+    margin: 0px 8px;
+    animation: linehiter 0.5s ease-in-out infinite;
+}
+
+@keyframes linehiter {
+    50% {
+        height: 40px;
+    }
+    100% {
+        height: 10px;
+    }
+}
+
+.divanim1 {
+    border: 1px solid black;
+    height: 40px;
+    margin: 0px 8px;
+    animation: linehiter1 0.5s ease-in-out infinite;
+}
+
+@keyframes linehiter1 {
+    50% {
+        height: 10px;
+    }
+    100% {
+        height: 40px;
+    }
+}
+
+.divanim2 {
+    border: 1px solid black;
+    height: 10px;
+    margin: 0px 8px;
+    animation: linehiter2 1s ease-in-out infinite;
+}
+
+@keyframes linehiter2 {
+    50% {
+        height: 40px;
+    }
+    100% {
+        height: 10px;
+    }
+}
+
+.messagebox_loading {
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-weight: 600;
+    text-align: center;
+    text-shadow: gray;
+    font-size: large;
+}
+
+.overlay {
+    position: fixed;
+    display: none;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background-color: rgb(0 9 33 / 42%);
+    backdrop-filter: blur(1px);
+    -webkit-backdrop-filter: blur(10px);
+    z-index: 9999;
+    cursor: pointer;
+}
+
+.message_box {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    min-height: 25vh;
+    width: 40%;
+    padding: 1%;
+    background-color: white;
+    transform: translate(-50%, -50%);
+    border-radius: 5px;
+}

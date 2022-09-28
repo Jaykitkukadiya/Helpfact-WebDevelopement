@@ -1,0 +1,1176 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="{% static 'icon/fav.svg' %}" type="image/svg">
+    <title>deshbord</title>
+    <script>
+        var userid = "{{request.user.id}}";
+    </script>
+    <script
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDzscb1NF7BS9BUTR17ftaAobbJ9t84cZQ&callback=initMap&libraries=&v=3">
+        </script>
+    <link rel="stylesheet" href="{% static 'css/work_bordcpy.css' %}">
+    <script src="{% static 'js/work_bordcpy.js' %}"></script>
+</head>
+
+
+<body>
+    {% csrf_token %}
+    <!-- nav bar -->
+
+    <div class="stickynav" id="navbar">
+        <div class="site-logo-container">
+            <img class="site-logo" src="{% static 'icon/siteLogo1.svg' %}" alt="site logo">
+        </div>
+        <div class="navbar-buttons-container">
+            <a href="/">
+                <div class="navbar-button">Home</div>
+            </a>
+            <a href="/#features">
+                <div class="navbar-button">Features</div>
+            </a>
+            <a href="/#contactus">
+                <div class="navbar-button">Contact</div>
+            </a>
+            <a href="">
+                <div class="navbar-button">About</div>
+            </a>
+        </div>
+    </div>
+
+
+    <!-- deshboard container -->
+    <div class="deshboard-container">
+        <div class="deshboard-side-menu">
+
+            <div class="deshboard-sidemenu-tab" id="sidemenu_profile">
+                <div class="deshboard-sidemenu-tab-icon-container">
+                    <!-- <img class="deshboard-sidemenu-tab-icon" src="{% static 'icon/user.svg' %}" alt="no icon"> -->
+                    <svg id="sidemenu_profile_icon" class="deshboard-sidemenu-tab-icon"
+                        xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="30pt"
+                        height="30.000001pt" viewBox="0 0 30 30.000001" version="1.2">
+                        <defs>
+                            <clipPath id="clip1">
+                                <path
+                                    d="M 5.671875 14 L 24.535156 14 L 24.535156 25.253906 L 5.671875 25.253906 Z M 5.671875 14 " />
+                            </clipPath>
+                            <clipPath id="clip2">
+                                <path d="M 9 3.480469 L 22 3.480469 L 22 16 L 9 16 Z M 9 3.480469 " />
+                            </clipPath>
+                        </defs>
+                        <g id="surface1">
+                            <g clip-path="url(#clip1)" clip-rule="nonzero">
+                                <path fill="currentColor" style=" stroke:none;fill-rule:nonzero;;fill-opacity:1;"
+                                    d="M 21.734375 14.519531 C 21.578125 14.363281 21.359375 14.277344 21.132812 14.277344 C 20.660156 14.277344 20.273438 14.652344 20.273438 15.113281 C 20.273438 15.335938 20.367188 15.550781 20.53125 15.710938 C 21.992188 17.121094 22.816406 19.054688 22.816406 21.066406 C 22.816406 22.085938 19.804688 23.578125 15.097656 23.578125 C 10.390625 23.578125 7.378906 22.085938 7.378906 21.066406 C 7.375 19.066406 8.1875 17.148438 9.632812 15.730469 C 9.964844 15.410156 9.964844 14.875 9.632812 14.550781 C 9.300781 14.230469 8.753906 14.230469 8.425781 14.550781 C 6.652344 16.273438 5.652344 18.621094 5.664062 21.066406 C 5.664062 23.785156 10.523438 25.25 15.097656 25.25 C 19.671875 25.25 24.535156 23.785156 24.535156 21.066406 C 24.539062 18.605469 23.53125 16.246094 21.734375 14.519531 " />
+                            </g>
+                            <g clip-path="url(#clip2)" clip-rule="nonzero">
+                                <path fill="currentColor" style=" stroke:none;fill-rule:nonzero;fill-opacity:1;"
+                                    d="M 15.097656 15.207031 C 18.390625 15.207031 21.101562 12.558594 21.101562 9.34375 C 21.101562 6.132812 18.390625 3.484375 15.097656 3.484375 C 11.804688 3.484375 9.09375 6.132812 9.09375 9.34375 C 9.09375 12.558594 11.804688 15.207031 15.097656 15.207031 Z M 15.097656 5.160156 C 17.449219 5.160156 19.386719 7.050781 19.386719 9.34375 C 19.386719 11.640625 17.449219 13.53125 15.097656 13.53125 C 12.746094 13.53125 10.808594 11.640625 10.808594 9.34375 C 10.808594 7.050781 12.746094 5.160156 15.097656 5.160156 " />
+                            </g>
+                        </g>
+                    </svg>
+                </div>
+                <div class="deshboard-sidemenu-tab-text">Profile details</div>
+            </div>
+
+            <div class="deshboard-sidemenu-tab" id="sidemenu_open_task">
+                <div class="deshboard-sidemenu-tab-icon-container">
+                    <img class="deshboard-sidemenu-tab-icon" src="{% static 'icon/search_task.svg' %}" alt="no icon">
+                    <svg id="sidemenu_open_task_icon" class="deshboard-sidemenu-tab-icon hidd"
+                        xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 384 384" version="1.2">
+                        <defs>
+                            <clipPath id="a">
+                                <path d="M44.707 44.707h294.75v294.75H44.707zm0 0" />
+                            </clipPath>
+                        </defs>
+                        <g clip-path="url(#a)">
+                            <path
+                                d="M339.457 192.082c0 .691-.066 1.375-.2 2.055a10.589 10.589 0 01-1.573 3.793c-.383.578-.82 1.11-1.309 1.597a10.445 10.445 0 01-3.414 2.282c-.64.265-1.297.464-1.977.597-.675.137-1.363.203-2.054.203H202.61v126.32c0 .692-.067 1.38-.204 2.055-.133.68-.332 1.336-.597 1.977-.266.637-.59 1.242-.973 1.82a10.445 10.445 0 01-2.906 2.903 10.589 10.589 0 01-3.793 1.574 10.68 10.68 0 01-4.106 0 10.5 10.5 0 01-1.976-.602 10.445 10.445 0 01-3.414-2.281 10.445 10.445 0 01-2.282-3.414 10.59 10.59 0 01-.601-1.977 10.653 10.653 0 01-.203-2.054V202.61H55.235c-.692 0-1.376-.067-2.055-.204a10.57 10.57 0 01-3.793-1.57 10.445 10.445 0 01-1.594-1.309 10.313 10.313 0 01-1.313-1.597 10.68 10.68 0 01-.972-1.817c-.262-.64-.461-1.297-.598-1.976a10.684 10.684 0 01-.203-2.055 10.613 10.613 0 01.8-4.027 10.47 10.47 0 012.285-3.414c.49-.489 1.02-.926 1.595-1.309.574-.387 1.18-.71 1.82-.973a10.55 10.55 0 011.973-.601c.68-.133 1.363-.203 2.054-.203h126.32V55.235a10.55 10.55 0 01.805-4.027c.262-.642.586-1.247.973-1.821.383-.575.82-1.106 1.309-1.594a10.47 10.47 0 013.414-2.285 10.613 10.613 0 014.027-.8c.691-.001 1.375.07 2.055.202.68.137 1.336.336 1.976.598.637.265 1.242.59 1.817.972.578.387 1.11.82 1.597 1.313a10.445 10.445 0 012.282 3.414c.265.637.464 1.297.597 1.973.137.68.203 1.363.203 2.054v126.32h126.32a10.59 10.59 0 015.852 1.777c.574.384 1.106.821 1.594 1.31a10.445 10.445 0 012.281 3.414 10.5 10.5 0 01.602 1.976c.133.676.199 1.36.199 2.051zm0 0"
+                                fill="currentColor" />
+                        </g>
+                    </svg>
+                </div>
+                <div class="deshboard-sidemenu-tab-text">Open task</div>
+            </div>
+
+            <div class="deshboard-sidemenu-tab" id="sidemenu_pending">
+                <div class="deshboard-sidemenu-tab-icon-container">
+                    <!-- <img class="deshboard-sidemenu-tab-icon" src="{% static 'icon/pending.svg' %}" alt="no icon"> -->
+                    <svg id="sidemenu_pending_icon" class="deshboard-sidemenu-tab-icon"
+                        xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 384 384" version="1.2">
+                        <defs>
+                            <clipPath id="a">
+                                <path d="M197 203h125.34v125.434H197zm0 0" />
+                            </clipPath>
+                            <clipPath id="b">
+                                <path d="M83.09 55.648H289v272.786H83.09zm0 0" />
+                            </clipPath>
+                        </defs>
+                        <g clip-path="url(#a)">
+                            <path
+                                d="M320.664 227.719l-22.785-22.75c-2.223-2.215-5.836-2.215-8.055 0l-91.144 91a5.718 5.718 0 00-1.664 4.023v22.75c0 3.14 2.554 5.688 5.699 5.688H225.5c1.516 0 2.96-.602 4.02-1.672l68.324-68.215c.011-.008.023-.008.035-.02.012-.011.012-.023.023-.035l22.762-22.726a5.684 5.684 0 000-8.043zm-97.523 89.336h-14.73v-14.707l62.66-62.559 14.73 14.707zm70.714-70.602l-14.73-14.707 14.73-14.707 14.73 14.707zm0 0"
+                                fill="currentColor" />
+                        </g>
+                        <g clip-path="url(#b)">
+                            <path
+                                d="M179.926 317.055h-79.75a5.692 5.692 0 01-5.696-5.688V95.25c0-3.14 2.551-5.688 5.696-5.688h28.484v5.688c0 3.14 2.55 5.688 5.695 5.688h102.536c3.144 0 5.699-2.547 5.699-5.688v-5.688h28.48a5.692 5.692 0 015.696 5.688v96.684c0 3.14 2.554 5.687 5.699 5.687a5.692 5.692 0 005.695-5.687V95.25c0-9.406-7.668-17.063-17.09-17.063h-29.53c-2.356-6.609-8.626-11.374-16.04-11.374h-20.21c-4.024-6.938-11.485-11.376-19.665-11.376s-15.645 4.438-19.664 11.376H145.75c-7.406 0-13.672 4.765-16.031 11.374h-29.543c-9.422 0-17.086 7.657-17.086 17.063v216.117c0 9.41 7.664 17.063 17.086 17.063h79.75c3.144 0 5.699-2.547 5.699-5.688 0-3.137-2.555-5.687-5.7-5.687zM145.75 78.187h23.832a5.712 5.712 0 005.367-3.785c1.617-4.539 5.914-7.59 10.676-7.59 4.762 0 9.055 3.051 10.676 7.59a5.694 5.694 0 005.363 3.785H225.5a5.692 5.692 0 015.695 5.688v5.688h-91.144v-5.688c0-3.14 2.554-5.688 5.699-5.688zm0 0"
+                                fill="currentColor" />
+                        </g>
+                    </svg>
+                </div>
+                <div class="deshboard-sidemenu-tab-text">Pending tasks</div>
+            </div>
+
+            <div class="deshboard-sidemenu-tab" id="sidemenu_completed">
+                <div class="deshboard-sidemenu-tab-icon-container">
+                    <svg id="sidemenu_completed_icon" class="deshboard-sidemenu-tab-icon"
+                        xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="384pt"
+                        height="383.999986pt" viewBox="0 0 384 383.999986" version="1.2">
+                        <defs>
+                            <clipPath id="clip1">
+                                <path
+                                    d="M 17.34375 59 L 366.84375 59 L 366.84375 324.960938 L 17.34375 324.960938 Z M 17.34375 59 " />
+                            </clipPath>
+                        </defs>
+                        <g id="surface1">
+                            <path fill="currentColor" style=" stroke:none;fill-rule:nonzero;fill-opacity:1;"
+                                d="M 24.425781 212.410156 L 49.898438 186.984375 L 131.25 268.203125 L 334.289062 65.527344 L 359.761719 90.953125 L 131.25 319.058594 Z M 24.425781 212.410156 " />
+                            <g clip-path="url(#clip1)" clip-rule="nonzero">
+                                <path style=" stroke:none;fill-rule:nonzero;fill:rgb(100%,100%,100%);fill-opacity:1;"
+                                    d="M 334.289062 71.996094 L 353.28125 90.953125 L 131.261719 312.589844 L 30.90625 212.410156 L 49.898438 193.453125 L 124.769531 268.195312 L 131.25 274.664062 L 137.730469 268.195312 L 334.289062 71.996094 M 334.289062 59.058594 L 131.261719 261.734375 L 49.90625 180.527344 L 17.945312 212.410156 L 131.261719 325.527344 L 366.242188 90.953125 Z M 334.289062 59.058594 " />
+                            </g>
+                        </g>
+                    </svg>
+                </div>
+                <div class="deshboard-sidemenu-tab-text">Completed tasks</div>
+            </div>
+
+            <div class="deshboard-sidemenu-tab" id="sidemenu_messages">
+                <div class="deshboard-sidemenu-tab-icon-container">
+                    <img id="sidemenu_messages_icon" class="deshboard-sidemenu-tab-icon"
+                        src="{% static 'icon/message.svg' %}" alt="" srcset="">
+                </div>
+                <div class="deshboard-sidemenu-tab-text">message</div>
+            </div>
+
+            <!-- 
+            <div class="deshboard-sidemenu-tab" id="sidemenu_payment_info">
+                <div class="deshboard-sidemenu-tab-icon-container">
+                    <img class="deshboard-sidemenu-tab-icon " src="{% static 'icon/payment_card.svg' %}" alt="no icon">
+                    <svg id="sidemenu_payment_info_icon" class="deshboard-sidemenu-tab-icon hidd"
+                        xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 384 384" version="1.2">
+                        <defs>
+                            <clipPath id="a">
+                                <path d="M197 203h125.34v125.434H197zm0 0" />
+                            </clipPath>
+                            <clipPath id="b">
+                                <path d="M83.09 55.648H289v272.786H83.09zm0 0" />
+                            </clipPath>
+                        </defs>
+                        <g clip-path="url(#a)">
+                            <path
+                                d="M320.664 227.719l-22.785-22.75c-2.223-2.215-5.836-2.215-8.055 0l-91.144 91a5.718 5.718 0 00-1.664 4.023v22.75c0 3.14 2.554 5.688 5.699 5.688H225.5c1.516 0 2.96-.602 4.02-1.672l68.324-68.215c.011-.008.023-.008.035-.02.012-.011.012-.023.023-.035l22.762-22.726a5.684 5.684 0 000-8.043zm-97.523 89.336h-14.73v-14.707l62.66-62.559 14.73 14.707zm70.714-70.602l-14.73-14.707 14.73-14.707 14.73 14.707zm0 0"
+                                fill="currentColor" />
+                        </g>
+                        <g clip-path="url(#b)">
+                            <path
+                                d="M179.926 317.055h-79.75a5.692 5.692 0 01-5.696-5.688V95.25c0-3.14 2.551-5.688 5.696-5.688h28.484v5.688c0 3.14 2.55 5.688 5.695 5.688h102.536c3.144 0 5.699-2.547 5.699-5.688v-5.688h28.48a5.692 5.692 0 015.696 5.688v96.684c0 3.14 2.554 5.687 5.699 5.687a5.692 5.692 0 005.695-5.687V95.25c0-9.406-7.668-17.063-17.09-17.063h-29.53c-2.356-6.609-8.626-11.374-16.04-11.374h-20.21c-4.024-6.938-11.485-11.376-19.665-11.376s-15.645 4.438-19.664 11.376H145.75c-7.406 0-13.672 4.765-16.031 11.374h-29.543c-9.422 0-17.086 7.657-17.086 17.063v216.117c0 9.41 7.664 17.063 17.086 17.063h79.75c3.144 0 5.699-2.547 5.699-5.688 0-3.137-2.555-5.687-5.7-5.687zM145.75 78.187h23.832a5.712 5.712 0 005.367-3.785c1.617-4.539 5.914-7.59 10.676-7.59 4.762 0 9.055 3.051 10.676 7.59a5.694 5.694 0 005.363 3.785H225.5a5.692 5.692 0 015.695 5.688v5.688h-91.144v-5.688c0-3.14 2.554-5.688 5.699-5.688zm0 0"
+                                fill="currentColor" />
+                        </g>
+                    </svg>
+                </div>
+                <div class="deshboard-sidemenu-tab-text">Payment info</div>
+            </div> -->
+        </div>
+
+
+        <!-- pages -->
+        <div class="workboard-pages-container">
+
+
+
+            <!-- profile page -->
+            <div class="workboard-page-profile" id="workboard_page_profile">
+                <div class="workboard-profile-title-container">
+                    <h2 style=" margin: 0px 0px 0px 20px; line-height: 30px; color:var(--title-color);">
+                        Profile Detail
+                    </h2>
+                    <div class="workboard-profile-update-submit-btn" id="logout_request_btn">Logout</div>
+                </div>
+                <div class="workboard-page-profile-inner-container">
+                    <div class="workboard-page-profile-image-container">
+                        <div class="workboard-profile-image-photo-container">
+                            <img class="workboard-profile-image" id="workboard_profile_image_show" src="/media/{{request.user.extended_user_details.image}}" alt="noimage">
+                            <a href="/media/{{request.user.extended_user_details.image}}"id="workboard_profile_image_link" class="workboard-profile-image" target="_blank" rel="">
+                                <div class="profile-tint"></div>
+                            </a>
+                        </div>
+                        <input type="file" id="workboard_profile_image_updated" class="hidd" accept="image/*">
+                        <div class="workboard-profile-image-photo-btn" id="workboard_profile_image_update_btn">Change Image</div>
+                    </div>
+                    <div class="workboard-page-profile-info-container">
+                        <div class="workboard-completed-page-part-list-container">
+                            <div class="workboard-completed-page-part-selector workboard-page-part-selector-selected"
+                                id="workboard_profile_page_profile_detail">
+                                Profile Details</div>
+                            <div class="workboard-completed-page-part-selector"
+                                id="workboard_profile_page_update_detail">Update Details
+                            </div>
+                        </div>
+                        <div class="workboard-profile-detail-detail" id="workboard_profile_page_profile_detail_page">
+                            <div class="workboard-field-container flx">
+                                <div class="workboard-profile-lable">user name</div>:
+                                <div class="workboard-profile-detail">{{request.user}}</div>
+                            </div>
+                            <div class="workboard-field-container flx">
+                                <div class="workboard-profile-lable">full name</div>:
+                                <div class="workboard-profile-detail"><span id="workboard_profile_detail_fname">{{request.user.first_name}}</span> <span id="workboard_profile_detail_lname">{{request.user.last_name}}</span></div>
+                            </div>
+                            <div class="workboard-field-container flx">
+                                <div class="workboard-profile-lable">Email address</div>:
+                                <div class="workboard-profile-detail" id="workboard_profile_detail_email">{{request.user.email}}</div>
+                            </div>
+                            <div class="workboard-field-container flx">
+                                <div class="workboard-profile-lable">mobile number</div>:
+                                <div class="workboard-profile-detail" id="workboard_profile_detail_mobile">{{request.user.extended_user_details.mobile_number}}</div>
+                            </div>
+                            <div class="workboard-field-container flx">
+                                <div class="workboard-profile-lable">gender</div>:
+                                <div class="workboard-profile-detail">{{request.user.extended_user_details.xender}}</div>
+                            </div>
+                            <div class="workboard-field-container flx">
+                                <div class="workboard-profile-lable">Address</div>:
+                                <div class="workboard-profile-detail" id="workboard_profile_detail_address">{{request.user.extended_user_details.address}}</div>
+                            </div>
+                            <div class="workboard-field-container flx">
+                                <div class="workboard-profile-lable">pincode</div>:
+                                <div class="workboard-profile-detail" id="workboard_profile_detail_pincode">{{request.user.extended_user_details.pincode}}</div>
+                            </div>
+                        </div>
+                        <div class="workboard-profile-detail-update hidd" id="workboard_profile_page_update_detail_page">
+                            <div class="workboard-field-container flx">
+                                <div class="workboard-profile-lable">first name</div>:&nbsp;&nbsp;&nbsp;
+                                <input class="workboard-profile-detail-update-input" type="text" id="workboard_profile_detail_update_fname" placeholder="{{request.user.first_name}}">
+                            </div>
+                            <div class="workboard-field-container flx">
+                                <div class="workboard-profile-lable">last name</div>:&nbsp;&nbsp;&nbsp;
+                                <input class="workboard-profile-detail-update-input" type="text" id="workboard_profile_detail_update_lname" placeholder="{{request.user.last_name}}">
+                            </div>
+                            <div class="workboard-field-container flx">
+                                <div class="workboard-profile-lable">Email address</div>:&nbsp;&nbsp;&nbsp;
+                                <input class="workboard-profile-detail-update-input" type="email" id="workboard_profile_detail_update_email" placeholder="{{request.user.email}}">
+                            </div>
+                            <div class="workboard-field-container flx">
+                                <div class="workboard-profile-lable">mobile number</div>:&nbsp;&nbsp;&nbsp;
+                                <input class="workboard-profile-detail-update-input" type="number" id="workboard_profile_detail_update_mobile" max=9999999999 placeholder="{{request.user.extended_user_details.mobile_number}}">
+                            </div>
+                            <div class="workboard-field-container flx">
+                                <div class="workboard-profile-lable">Address</div>:&nbsp;&nbsp;&nbsp;
+                                <textarea class="workboard-profile-detail-update-input-textarea" id="workboard_profile_detail_update_address" placeholder="{{request.user.extended_user_details.address}}"></textarea>
+                            </div>
+                            <div class="workboard-field-container flx">
+                                <div class="workboard-profile-lable">pincode</div>:&nbsp;&nbsp;&nbsp;
+                                <input class="workboard-profile-detail-update-input" type="number" id="workboard_profile_detail_update_pincode" max=999999 placeholder="{{request.user.extended_user_details.pincode}}">
+                            </div>
+                            <div class="workboard-field-container flx">
+                                <div class="workboard-profile-update-submit-btn" id="workboard_profile_detail_update_btn">submit</div>
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+            <!-- open task page -->
+            <div class="workboard-page-open-task" id="workboard_page_open_task">
+                <div class="workboard-page-open-task-container">
+
+                    <div id="empty_message" class="empty-container hidd">
+                        No task are available
+                    </div>
+
+                    <!-- this is for filtering which is pending right now -->
+                    <!-- <div class="open-control-container">
+                        zf
+                    </div> -->
+
+                    <div class="open-detail-container" id="outer_open_task_container">
+
+                        <div class="open-task-table" id="open_task_container">
+                            <div class="open-task-table-header">
+                                <div class="open-task-table-header-img">Img</div>
+                                <div class="open-task-table-header-name">Name</div>
+                                <div class="open-task-table-header-address">Address</div>
+                                <div class="open-task-table-header-deadline">Deadline</div>
+                                <div class="open-task-table-header-gmap">G-map</div>
+                                <div class="open-task-table-header-choose">Choose</div>
+                            </div>
+                            {% for pending_task in pand_obj %}
+                            <div class="open-task-table-detail" id="open_task_{{pending_task.id}}">
+                                <a href="/media/{{pending_task.task_detail_link.image}}" target="_blank"
+                                    id="open_task_image_link_{{pending_task.id}}" rel="noopener noreferrer"><img
+                                        class="open-task-table-img" id="open_task_image_{{pending_task.id}}"
+                                        src="/media/{{pending_task.task_detail_link.image}}" alt=""></a>
+                                <div class="open-task-table-name">{{pending_task.task_detail_link.name}}</div>
+                                <div class="open-task-table-address" id="open_task_address_{{pending_task.id}}">
+                                    {{pending_task.task_detail_link.address}}</div>
+                                <div class="open-task-table-deadline" id="open_task_deadline_{{pending_task.id}}">...
+                                </div>
+                                <a href="#" target="_blank"
+                                    id="open_task_address_location_link_{{pending_task.id}}"><img
+                                        class="open-task-table-gmap" src="{% static 'icon/map_location.svg' %}"
+                                        alt=""></a>
+                                <div class="open-task-table-choose">
+                                    <div class="open-task-accept-btn" id="open_task_accept_{{pending_task.id}}">
+                                        Accept
+                                    </div>
+                                </div>
+                            </div>
+                            <script>
+                                open_task_detail['id'].push("{{pending_task.id}}");
+                                open_task_detail['selected_deadline_intervals'].push({
+                                    id: `{{pending_task.id}}`,
+                                    interval: open_task_reverse_timer("open_task_deadline_{{pending_task.id}}", "{{pending_task.task_detail_link.deadline}}")
+                                });
+                                document.getElementById("open_task_address_location_link_{{pending_task.id}}").href = `https://www.google.com/maps/dir/?api=1&origin=Current+Location&destination=${JSON.parse('{{pending_task.task_detail_link.gmaplink | safe}}').lat},${JSON.parse('{{pending_task.task_detail_link.gmaplink | safe}}').lng}&output=embed`;
+                            </script>
+                            {% endfor %}
+                            <script>
+                                open_task_accept_add_listener();
+                            </script>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="popup-outer-container hidd" id="accept_popup">
+                    <div class="popup-accept-box">
+                        <div class="popup-content" id="googlemap_container">
+                            <h2 style="text-align: center; margin: 0px 0px 10px 0px;">
+                                Enter Live Location Link
+                            </h2>
+                            <textarea class="open-task-accept-live-loc" id="open_task_accept_live_location" cols="30"
+                                rows="10" placeholder="..."></textarea>
+                            <div class="center-btn-container">
+                                <div class="submit-btn" id="open_task_accept_submit">
+                                    Submit
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- pending task page -->
+            <div class="workboard-page-pending" id="workboard_page_pending">
+                <div id="pending_empty_message" class="empty-container hidd">
+                    No task are assigned
+                </div>
+                <div class="pending-card-container" id="pending_card_container">
+                    {% for pending_accepted_task in pand_accepted_obj %}
+                    <div class="pending-card" id="pending_card_{{pending_accepted_task.id}}">
+                        <div class="pending-card-image-container">
+                            <img class="pending-card-image" id="pending_task_card_image_{{pending_accepted_task.id}}"
+                                src="/media/{{pending_accepted_task.task_detail_link.image}}" alt="">
+                        </div>
+                        <div class="pending-card-detail-container">
+                            <div class="pending-card-name">{{pending_accepted_task.task_detail_link.name}}</div>
+                            <div class="pending-card-timer"
+                                id="pending_task_selector_timer_{{pending_accepted_task.id}}">...</div>
+                        </div>
+                    </div>
+                    <script>
+                        pending_task_detail['id'].push("{{pending_accepted_task.id}}");
+                        pending_task_detail['selected_deadline_intervals'].push({
+                            id: `{{pending_accepted_task.id}}`,
+                            interval: open_task_reverse_timer("pending_task_selector_timer_{{pending_accepted_task.id}}", "{{pending_accepted_task.task_detail_link.deadline}}")
+                        });
+                        pending_card_more_details_listener();
+                    </script>
+                    {% endfor %}
+                </div>
+
+                <div class="popup-outer-container hidd" id="pending_more_detail_popup">
+                    <div class="popup-more-detail-box">
+                        <div class="popup-content">
+                            <h2 style="text-align: center; margin: 0px 0px 10px 0px; line-height: 30px;">
+                                Task Detail
+                            </h2>
+
+                            <div class="pending-page-detail-part-list-container">
+                                <div class="pending-page-detail-part-selected " id="pending_task_info">
+                                    Task info</div>
+                                <div class="pending-page-detail-part-selector" id="pending_location_info">
+                                    Task Location
+                                </div>
+                                <div class="pending-page-detail-part-selector" id="pending_user_info">
+                                    User info
+                                </div>
+                                <div class="pending-page-detail-part-selector" id="pending_manage_task">
+                                    Manage Task
+                                </div>
+
+                            </div>
+
+                            <div class="pending-detail-container" id="pending_task_info_page">
+
+                                <div class="pending-detail-name-container">
+                                    <div class="pending-detail-basic-naming-container">
+                                        <div class="pending-details-name flx">
+                                            <div class="pending-task-more-detail-lable">Task Deadline</div>
+                                            <div class="pending-task-more-detail-field" id="pending_task_deadline"
+                                                style="color: red;">: . . . .</div>
+                                        </div>
+                                        <div class="pending-details-task-waiting-status flx">
+                                            <div class="pending-task-more-detail-lable">Task Name </div>
+                                            <div class="pending-task-more-detail-field" id="pending_task_name">:Jaykit
+                                                kukadiya</div>
+                                        </div>
+                                        <div class="pending-details-deadline flx">
+                                            <div class="pending-task-more-detail-lable">Task Gender </div>
+                                            <div class="pending-task-more-detail-field" id="pending_task_gender">:Male
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <a href="" target="_blank" class="pending-detail-image-container"
+                                        id="pending_task_profile_image_link">
+                                        <img src="" alt="" id="pending_task_profile_image" class="pending-detail-image">
+                                    </a>
+
+
+
+                                </div>
+
+
+                                <div class="pending-detail-address flx">
+                                    <div class="pending-task-more-detail-lable">Task Address </div>
+                                    <div class="pending-task-more-detail-field" id="pending_task_address">: C-803
+                                        Blossom homes,
+                                        near abc circle, Mota Varachha,
+                                        Surat, Gujarat 394101, India</div>
+                                </div>
+                                <div class="pending-detail-pincode flx">
+                                    <div class="pending-task-more-detail-lable">Task Pincode </div>
+                                    <div class="pending-task-more-detail-field" id="pending_task_pincode">:394001</div>
+                                </div>
+                                <div class="pending-detail-mobile flx">
+                                    <div class="pending-task-more-detail-lable">Task Mobile </div>
+                                    <div class="pending-task-more-detail-field" id="pending_task_mobile">:7845124578
+                                    </div>
+                                </div>
+                                <div class="pending-detail-mobile flx" id="">
+                                    <div class="pending-task-more-detail-lable">Task Accepted At </div>
+                                    <div class="pending-task-more-detail-field" id="pending_task_accepted_time">:today
+                                    </div>
+                                </div>
+                                <div class="pending-detail-message flx">
+
+                                    <div class="pending-task-more-detail-lable">Task Note </div>
+                                    <div class="pending-task-more-detail-field" id="pending_task_note">
+                                        :hi i am jaykit kukadiya
+                                        and i want to talk with you but
+                                        i got certain problems related to connection so i hire the agent and i wish you
+                                        trust on
+                                        this agent. and provide those information which we got from seminar to this
+                                        agent.
+                                    </div>
+                                </div>
+
+
+                                <div class="pending-detail-document-btn-container flx">
+                                    <a href="" target="_blank" id="pending_task_document_link">
+                                        <div class="pending-detail-proof-document-btn">Document</div>
+                                    </a>
+                                    <a href="" target="_blank" id="pending_task_proof_link">
+                                        <div class="pending-detail-proof-document-btn">Proof</div>
+                                    </a>
+                                </div>
+
+                            </div>
+
+                            <div class="pending-detail-container hidd" id="pending_user_info_page">
+
+                                <div class="pending-detail-name-container">
+                                    <div class="pending-detail-basic-naming-container">
+                                        <div class="pending-details-task-waiting-status flx">
+                                            <div class="pending-task-more-detail-lable">User Name </div>
+                                            <div class="pending-task-more-detail-field" id="pending_task_user_name">
+                                                :Jaykit kukadiya</div>
+                                        </div>
+
+                                        <div class="pending-details-deadline flx">
+                                            <div class="pending-task-more-detail-lable">User Gender </div>
+                                            <div class="pending-task-more-detail-field" id="pending_task_user_gender">
+                                                :Male</div>
+                                        </div>
+                                        <div class="pending-details-name flx">
+                                            <div class="pending-task-more-detail-lable">User Mobile</div>
+                                            <div class="pending-task-more-detail-field" id="pending_task_user_mobile">:
+                                                7878444205</div>
+                                        </div>
+                                    </div>
+
+                                    <a href="" target="_blank" class="pending-detail-image-container"
+                                        id="pending_task_user_profile_image_link">
+                                        <!-- image  -->
+                                        <img src="" alt="" id="pending_task_user_profile_image"
+                                            class="pending-detail-image">
+                                    </a>
+                                </div>
+
+                            </div>
+                            <div class="pending-detail-container hidd" id="pending_location_info_page">
+
+                                <div class="pending-task-more-detail-gmap" id="pending_task_gmap_container">
+                                </div>
+
+                            </div>
+                            <div class="pending-detail-container hidd" id="pending_manage_task_page">
+
+                                <div class="pending-task-more-detail-gmap" id="">
+                                    <div class="pandign-task-opt-container">
+                                        <input class="pending-task-otp-field" id="pending_more_otp_text" type="text"
+                                            placeholder="OTP for current task">
+                                        <div class="pending-task-more-detail-manage-btn-container flx">
+                                            <div class="pending-btn" id="pending_more_complete_btn">Complete Task</div>
+                                            <div class="pending-btn" id="pending_more_cancel_btn">Cancel Task</div>
+                                        </div>
+                                    </div>
+                                    <div></div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="loading-dots-container-page hidd" id="page_loading_rounder">
+                    <img class="loading-dots-img" src="{% static 'icon/four_dots_loading.svg' %}" alt="">
+                </div>
+            </div>
+
+
+            <!-- completed task page -->
+            <div class="workboard-page-completed" id="workboard_page_completed">
+                <div class="workboard-completed-page-inner-container">
+                    <div class="workboard-completed-page-title">Task history</div>
+                    <div class="workboard-completed-page-part-list-container">
+                        <div class="workboard-completed-page-part-selector workboard-page-part-selector-selected"
+                            id="workboard_completed_page_part_selector_completed">
+                            Completed</div>
+                        <div class="workboard-completed-page-part-selector"
+                            id="workboard_completed_page_part_selector_expired">Expired
+                        </div>
+                    </div>
+                    <div class="workboard-completed-page-more-detail-btn-container hidd"
+                        id="completed_page_more_detail_btn_container">
+                        <div class="workboard-completed-task-more-detail-btn" id="completed_task_more_detail">Task
+                            detail
+                        </div>
+                        <div class="workboard-completed-task-more-detail-btn" id="completed_task_query">Task Query</div>
+                    </div>
+                    <div class="workboard-completed-page-part-container">
+
+                        <div id="workboard_completed_page_part_completed"
+                            class="workboard-completed-page-expired-task-container">
+                            <div class="workboard-completed-page-expired-task-header">
+                                <div class="workboard-completed-page-expired-task-header-img">Img</div>
+                                <div class="workboard-completed-page-expired-task-header-name">Task Name</div>
+                                <div class="workboard-completed-page-expired-task-header-gender">Gender</div>
+                                <div class="workboard-completed-page-expired-task-header-mobile">User Mobile</div>
+                                <div class="workboard-completed-page-expired-task-header-accept">payment</div>
+                                <div class="workboard-completed-page-expired-task-header-refid">Ref Id</div>
+                                <div class="workboard-completed-page-expired-task-header-choose">Choose</div>
+                            </div>
+                            {% for completed_task_completed_obj in completed_task_objs_completed %}
+                            <div class="workboard-completed-page-expired-task-detail">
+                                <!-- <img class="workboard-completed-page-expired-task-detail-profile-img"
+                                    src="/media/{{completed_task_completed_obj.task_detail_link.image}}" alt=""> -->
+                                <svg class="workboard-completed-page-expired-task-detail-profile-img" xmlns="http://www.w3.org/2000/svg" width="50" height="50"
+                                    viewBox="0 0 37.5 37.5" version="1.2">
+                                    <defs>
+                                        <clipPath id="a">
+                                            <path d="M0 0h37.008v37.008H0zm0 0" />
+                                        </clipPath>
+                                        <clipPath id="b">
+                                            <path d="M1.145 23.828h35.21v13.18H1.145zm0 0" />
+                                        </clipPath>
+                                        <clipPath id="c">
+                                            <path d="M13.066 26.113h11.329v10.895H13.066zm0 0" />
+                                        </clipPath>
+                                        <clipPath id="d">
+                                            <path d="M15.648 26.21h5.965v10.798h-5.965zm0 0" />
+                                        </clipPath>
+                                        <clipPath id="e">
+                                            <path d="M9.191 23.828h9.637v13.18H9.191zm0 0" />
+                                        </clipPath>
+                                        <clipPath id="f">
+                                            <path d="M18.73 23.828h9.637v13.18H18.73zm0 0" />
+                                        </clipPath>
+                                        <clipPath id="g">
+                                            <path d="M7.402 33.07h1.391v3.938h-1.39zm0 0" />
+                                        </clipPath>
+                                        <clipPath id="h">
+                                            <path d="M28.766 33.07h1.39v3.938h-1.39zm0 0" />
+                                        </clipPath>
+                                    </defs>
+                                    <g clip-path="url(#a)" fill="#fff">
+                                        <path d="M0 0h37.5v45H0zm0 0" />
+                                        <path d="M0 0h37.5v37.5H0zm0 0" />
+                                    </g>
+                                    <g clip-path="url(#b)">
+                                        <path
+                                            d="M16.887 30.195l-3.785-6.312c-4.883 1.656-11.25 2.105-11.707 8.676-.055.832-.192 2.91-.25 4.945h35.21a136.761 136.761 0 00-.253-4.945c-.457-6.57-6.825-7.02-11.704-8.676l-3.785 6.312h-3.726"
+                                            fill-rule="evenodd" fill="#6b809b" />
+                                    </g>
+                                    <path
+                                        d="M25.82 7.164l-.133 2.848c1.125 2.133-.023 3.297-.617 3.722-.277 2.454-1.683 4.086-3.457 4.903a6.654 6.654 0 01-2.77.597c-.948 0-1.902-.199-2.773-.597-1.773-.817-3.175-2.45-3.457-4.903-.59-.425-1.742-1.59-.617-3.722l-.133-2.848.024-.191c.52-1.774 1.718-3.051 3.215-3.832 1.207-.633 2.605-.938 3.984-.918 1.387.023 2.762.37 3.914 1.047 1.352.796 2.398 2.039 2.805 3.73l.015.164" />
+                                    <g clip-path="url(#c)">
+                                        <path
+                                            d="M18.71 26.2c3.114 0 5.638 2.093 5.638 3.917 0 1.824-1.188 6.723-2.938 7.387h-5.398c-1.75-.664-2.938-5.563-2.938-7.387 0-1.824 2.524-3.918 5.637-3.918"
+                                            fill-rule="evenodd" fill="#fff" />
+                                    </g>
+                                    <g clip-path="url(#d)">
+                                        <path
+                                            d="M18.785 26.242L16.66 28.48l.633.81-1.633 8.214h4.465l1.422-.063-1.07-8.148.437-.813-2.129-2.238"
+                                            fill-rule="evenodd" fill="#00bcd4" />
+                                    </g>
+                                    <path d="M23.504 16.95l.238 4.816-5.11 5.12-4.8-5.245.223-4.707 9.449.015"
+                                        fill-rule="evenodd" fill="#d3aa96" />
+                                    <path
+                                        d="M18.445 26.242L16.66 28.48l.633.81v.003h3.184l.437-.813-1.746-2.238h-.723"
+                                        fill-rule="evenodd" fill="#02abc1" />
+                                    <path
+                                        d="M11.695 23.883l2.153-2.531 4.937 4.89-3.777 4.227-3.313-6.586M25.879 23.883l-2.152-2.531-4.942 4.89 3.781 4.227 3.313-6.586"
+                                        fill-rule="evenodd" fill="#e8e8e8" />
+                                    <path
+                                        d="M25.824 10.824s2.422 3.547-.73 5.012l.73-5.012M11.746 10.824s-2.422 3.547.73 5.012l-.73-5.012"
+                                        fill-rule="evenodd" fill="#d3aa96" />
+                                    <path
+                                        d="M19.41 4.078c3.871 0 6.5 3.035 6.5 8.215 0 3.371-2.476 10.293-6.457 10.293h-1.332c-3.98 0-6.457-6.922-6.457-10.293 0-5.18 2.629-8.215 6.5-8.215h1.246"
+                                        fill-rule="evenodd" fill="#ffceb4" />
+                                    <path
+                                        d="M11.664 12.29s-.922-6.321.14-6.88c-.202-1.14.926-2.164 1.727-2.469 0 0 1.399-1.648 4.7-1.984 0 0 4.992-.953 7.917 3.633.473.742.391.578-.144 1.262.375 1.98.34 4.625-.094 6.57 0 0-.773-4.922-1.64-5.563 0 0-5.09 2.739-10.711-.476 0 0-.766.562-1.114 1.945-.078.313-.125.617-.18.98-.152 1.047-.359 1.934-.6 2.981"
+                                        fill-rule="evenodd" />
+                                    <g clip-path="url(#e)">
+                                        <path
+                                            d="M13.82 37.504l-3.699-7.027 1.152-1.98-2.074-.65.39-3.05 2.274-.914.106.207 6.781 13.414h-4.93"
+                                            fill-rule="evenodd" fill="#4f6074" />
+                                    </g>
+                                    <g clip-path="url(#f)">
+                                        <path
+                                            d="M23.68 37.504l3.695-7.027-1.148-1.98 2.07-.65-.39-3.05-2.274-.914-.102.207-6.781 13.414h4.93"
+                                            fill-rule="evenodd" fill="#4f6074" />
+                                    </g>
+                                    <g clip-path="url(#g)">
+                                        <path d="M7.934 33.113l.793 4.39H7.434zm0 0" fill-rule="evenodd"
+                                            fill="#4f6074" />
+                                    </g>
+                                    <g clip-path="url(#h)">
+                                        <path d="M29.563 33.113l-.793 4.39h1.296zm0 0" fill-rule="evenodd"
+                                            fill="#4f6074" />
+                                    </g>
+                                </svg>
+                                <div class="workboard-completed-page-expired-task-detail-name">
+                                    {{completed_task_completed_obj.task_detail_link.name}}</div>
+                                {% if completed_task_completed_obj.task_detail_link.gender == "Male" %}
+                                <img class="workboard-completed-page-expired-task-detail-gender"
+                                    src="{% static 'icon/male_symbol.svg' %}" alt="">
+                                {% else %}
+                                <img class="workboard-completed-page-expired-task-detail-gender"
+                                    src="{% static 'icon/female_symbol.svg' %}" alt="">
+                                {% endif %}
+                                <div class="workboard-completed-page-expired-task-detail-mobile">
+                                    {{completed_task_completed_obj.task_detail_link.mobile_number}}</div>
+                                {% if completed_task_completed_obj.payment.agent_payment_status == "success" %}
+                                <img class="workboard-completed-page-expired-task-detail-accept"
+                                    src="{% static 'icon/true_round.svg' %}" alt="">
+                                {% elif completed_task_completed_obj.payment.agent_payment_status == "pending" %}
+                                <img class="workboard-completed-page-expired-task-detail-accept"
+                                    src="{% static 'icon/pending_round.svg' %}" alt="">
+                                {% else %}
+                                <img class="workboard-completed-page-expired-task-detail-accept"
+                                    src="{% static 'icon/false_round.svg' %}" alt="">
+                                {% endif %}
+                                <div class="workboard-completed-page-expired-task-detail-refid">
+                                    {{completed_task_completed_obj.task_detail_link.id}}</div>
+                                <div class="workboard-completed-page-expired-task-detail-select-btn-outer-container">
+                                    <div class="workboard-completed-page-expired-task-detail-select-btn"
+                                        id="workboard_completed_page_completed_task_{{completed_task_completed_obj.task_detail_link.id}}">
+                                        Select</div>
+                                </div>
+                            </div>
+                            <script>
+                                completed_task_detail['id'].push(
+                                    "{{completed_task_completed_obj.task_detail_link.id}}");
+                            </script>
+                            {% endfor%}
+
+                        </div>
+                        <div id="workboard_completed_page_part_expired"
+                            class="workboard-completed-page-expired-task-container hidd">
+                            <div class="workboard-completed-page-expired-task-header">
+                                <div class="workboard-completed-page-expired-task-header-img">Img</div>
+                                <div class="workboard-completed-page-expired-task-header-name">Task Name</div>
+                                <div class="workboard-completed-page-expired-task-header-gender">Gender</div>
+                                <div class="workboard-completed-page-expired-task-header-mobile">User Mobile</div>
+                                <div class="workboard-completed-page-expired-task-header-accept">payment</div>
+                                <div class="workboard-completed-page-expired-task-header-refid">Ref Id</div>
+                                <div class="workboard-completed-page-expired-task-header-choose">Choose</div>
+                            </div>
+                            {% for completed_task_completed_obj in completed_task_objs_expired %}
+                            <div class="workboard-completed-page-expired-task-detail">
+                                <!-- <img class="workboard-completed-page-expired-task-detail-profile-img"
+                                    src="/media/{{completed_task_completed_obj.task_detail_link.image}}" alt=""> -->
+
+                                <svg class="workboard-completed-page-expired-task-detail-profile-img" xmlns="http://www.w3.org/2000/svg" width="50" height="50"
+                                    viewBox="0 0 37.5 37.5" version="1.2">
+                                    <defs>
+                                        <clipPath id="a">
+                                            <path d="M0 0h37.008v37.008H0zm0 0" />
+                                        </clipPath>
+                                        <clipPath id="b">
+                                            <path d="M1.145 23.828h35.21v13.18H1.145zm0 0" />
+                                        </clipPath>
+                                        <clipPath id="c">
+                                            <path d="M13.066 26.113h11.329v10.895H13.066zm0 0" />
+                                        </clipPath>
+                                        <clipPath id="d">
+                                            <path d="M15.648 26.21h5.965v10.798h-5.965zm0 0" />
+                                        </clipPath>
+                                        <clipPath id="e">
+                                            <path d="M9.191 23.828h9.637v13.18H9.191zm0 0" />
+                                        </clipPath>
+                                        <clipPath id="f">
+                                            <path d="M18.73 23.828h9.637v13.18H18.73zm0 0" />
+                                        </clipPath>
+                                        <clipPath id="g">
+                                            <path d="M7.402 33.07h1.391v3.938h-1.39zm0 0" />
+                                        </clipPath>
+                                        <clipPath id="h">
+                                            <path d="M28.766 33.07h1.39v3.938h-1.39zm0 0" />
+                                        </clipPath>
+                                    </defs>
+                                    <g clip-path="url(#a)" fill="#fff">
+                                        <path d="M0 0h37.5v45H0zm0 0" />
+                                        <path d="M0 0h37.5v37.5H0zm0 0" />
+                                    </g>
+                                    <g clip-path="url(#b)">
+                                        <path
+                                            d="M16.887 30.195l-3.785-6.312c-4.883 1.656-11.25 2.105-11.707 8.676-.055.832-.192 2.91-.25 4.945h35.21a136.761 136.761 0 00-.253-4.945c-.457-6.57-6.825-7.02-11.704-8.676l-3.785 6.312h-3.726"
+                                            fill-rule="evenodd" fill="#6b809b" />
+                                    </g>
+                                    <path
+                                        d="M25.82 7.164l-.133 2.848c1.125 2.133-.023 3.297-.617 3.722-.277 2.454-1.683 4.086-3.457 4.903a6.654 6.654 0 01-2.77.597c-.948 0-1.902-.199-2.773-.597-1.773-.817-3.175-2.45-3.457-4.903-.59-.425-1.742-1.59-.617-3.722l-.133-2.848.024-.191c.52-1.774 1.718-3.051 3.215-3.832 1.207-.633 2.605-.938 3.984-.918 1.387.023 2.762.37 3.914 1.047 1.352.796 2.398 2.039 2.805 3.73l.015.164" />
+                                    <g clip-path="url(#c)">
+                                        <path
+                                            d="M18.71 26.2c3.114 0 5.638 2.093 5.638 3.917 0 1.824-1.188 6.723-2.938 7.387h-5.398c-1.75-.664-2.938-5.563-2.938-7.387 0-1.824 2.524-3.918 5.637-3.918"
+                                            fill-rule="evenodd" fill="#fff" />
+                                    </g>
+                                    <g clip-path="url(#d)">
+                                        <path
+                                            d="M18.785 26.242L16.66 28.48l.633.81-1.633 8.214h4.465l1.422-.063-1.07-8.148.437-.813-2.129-2.238"
+                                            fill-rule="evenodd" fill="#00bcd4" />
+                                    </g>
+                                    <path d="M23.504 16.95l.238 4.816-5.11 5.12-4.8-5.245.223-4.707 9.449.015"
+                                        fill-rule="evenodd" fill="#d3aa96" />
+                                    <path
+                                        d="M18.445 26.242L16.66 28.48l.633.81v.003h3.184l.437-.813-1.746-2.238h-.723"
+                                        fill-rule="evenodd" fill="#02abc1" />
+                                    <path
+                                        d="M11.695 23.883l2.153-2.531 4.937 4.89-3.777 4.227-3.313-6.586M25.879 23.883l-2.152-2.531-4.942 4.89 3.781 4.227 3.313-6.586"
+                                        fill-rule="evenodd" fill="#e8e8e8" />
+                                    <path
+                                        d="M25.824 10.824s2.422 3.547-.73 5.012l.73-5.012M11.746 10.824s-2.422 3.547.73 5.012l-.73-5.012"
+                                        fill-rule="evenodd" fill="#d3aa96" />
+                                    <path
+                                        d="M19.41 4.078c3.871 0 6.5 3.035 6.5 8.215 0 3.371-2.476 10.293-6.457 10.293h-1.332c-3.98 0-6.457-6.922-6.457-10.293 0-5.18 2.629-8.215 6.5-8.215h1.246"
+                                        fill-rule="evenodd" fill="#ffceb4" />
+                                    <path
+                                        d="M11.664 12.29s-.922-6.321.14-6.88c-.202-1.14.926-2.164 1.727-2.469 0 0 1.399-1.648 4.7-1.984 0 0 4.992-.953 7.917 3.633.473.742.391.578-.144 1.262.375 1.98.34 4.625-.094 6.57 0 0-.773-4.922-1.64-5.563 0 0-5.09 2.739-10.711-.476 0 0-.766.562-1.114 1.945-.078.313-.125.617-.18.98-.152 1.047-.359 1.934-.6 2.981"
+                                        fill-rule="evenodd" />
+                                    <g clip-path="url(#e)">
+                                        <path
+                                            d="M13.82 37.504l-3.699-7.027 1.152-1.98-2.074-.65.39-3.05 2.274-.914.106.207 6.781 13.414h-4.93"
+                                            fill-rule="evenodd" fill="#4f6074" />
+                                    </g>
+                                    <g clip-path="url(#f)">
+                                        <path
+                                            d="M23.68 37.504l3.695-7.027-1.148-1.98 2.07-.65-.39-3.05-2.274-.914-.102.207-6.781 13.414h4.93"
+                                            fill-rule="evenodd" fill="#4f6074" />
+                                    </g>
+                                    <g clip-path="url(#g)">
+                                        <path d="M7.934 33.113l.793 4.39H7.434zm0 0" fill-rule="evenodd"
+                                            fill="#4f6074" />
+                                    </g>
+                                    <g clip-path="url(#h)">
+                                        <path d="M29.563 33.113l-.793 4.39h1.296zm0 0" fill-rule="evenodd"
+                                            fill="#4f6074" />
+                                    </g>
+                                </svg>
+                                <div class="workboard-completed-page-expired-task-detail-name">
+                                    {{completed_task_completed_obj.task_detail_link.name}}</div>
+                                {% if completed_task_completed_obj.task_detail_link.gender == "Male" %}
+                                <img class="workboard-completed-page-expired-task-detail-gender"
+                                    src="{% static 'icon/male_symbol.svg' %}" alt="">
+                                {% else %}
+                                <img class="workboard-completed-page-expired-task-detail-gender"
+                                    src="{% static 'icon/female_symbol.svg' %}" alt="">
+                                {% endif %}
+                                <div class="workboard-completed-page-expired-task-detail-mobile">
+                                    {{completed_task_completed_obj.task_detail_link.mobile_number}}</div>
+                                {% if completed_task_completed_obj.payment.agent_payment_status == "success" %}
+                                <img class="workboard-completed-page-expired-task-detail-accept"
+                                    src="{% static 'icon/true_round.svg' %}" alt="">
+                                {% elif completed_task_completed_obj.payment.agent_payment_status == "pending" %}
+                                <img class="workboard-completed-page-expired-task-detail-accept"
+                                    src="{% static 'icon/pending_round.svg' %}" alt="">
+                                {% else %}
+                                <img class="workboard-completed-page-expired-task-detail-accept"
+                                    src="{% static 'icon/false_round.svg' %}" alt="">
+                                {% endif %}
+                                <div class="workboard-completed-page-expired-task-detail-refid">
+                                    {{completed_task_completed_obj.task_detail_link.id}}</div>
+                                <div class="workboard-completed-page-expired-task-detail-select-btn-outer-container">
+                                    <div class="workboard-completed-page-expired-task-detail-select-btn"
+                                        id="workboard_completed_page_completed_task_{{completed_task_completed_obj.task_detail_link.id}}">
+                                        Select</div>
+                                </div>
+                            </div>
+                            <script>
+                                completed_task_detail['id'].push(
+                                    "{{completed_task_completed_obj.task_detail_link.id}}");
+                            </script>
+                            {% endfor%}
+                        </div>
+                    </div>
+                    <script>
+                        completed_task_select_listener();
+                    </script>
+                </div>
+
+                <div class="popup-outer-container hidd" id="completed_more_detail_popup">
+                    <div class="popup-more-detail-box">
+                        <div class="popup-content">
+                            <h2 style="text-align: center; margin: 0px 0px 10px 0px; line-height: 30px;">
+                                Task Detail
+                            </h2>
+
+                            <div class="pending-page-detail-part-list-container">
+                                <div class="pending-page-detail-part-selected " id="completed_task_info">
+                                    Task info</div>
+                                <div class="pending-page-detail-part-selector" id="completed_location_info">
+                                    Task Location
+                                </div>
+                                <div class="pending-page-detail-part-selector" id="completed_user_info">
+                                    User info
+                                </div>
+                                <div class="pending-page-detail-part-selector hidd" id="completed_payment_info">
+                                    payment info
+                                </div>
+                            </div>
+
+                            <div class="pending-detail-container" id="completed_task_info_page">
+
+                                <div class="pending-detail-name-container">
+                                    <div class="pending-detail-basic-naming-container">
+                                        <div class="pending-details-task-waiting-status flx">
+                                            <div class="pending-task-more-detail-lable">Task Name </div>:
+                                            <div class="pending-task-more-detail-field"
+                                                id="completed_task_more_info_name">:Jaykit
+                                                kukadiya</div>
+                                        </div>
+                                        <div class="pending-details-deadline flx">
+                                            <div class="pending-task-more-detail-lable">Task Gender </div>:
+                                            <div class="pending-task-more-detail-field"
+                                                id="completed_task_more_info_gender">:Male
+                                            </div>
+                                        </div>
+                                        <div class="pending-details-name flx">
+                                            <div class="pending-task-more-detail-lable">Task Pincode</div>:
+                                            <div class="pending-task-more-detail-field"
+                                                id="completed_task_more_info_pincode">: . . . .</div>
+                                        </div>
+                                    </div>
+
+                                    <a href="" target="_blank" class="pending-detail-image-container"
+                                        id="completed_task_more_info_image_link">
+                                        <img src="" alt="" id="completed_task_more_info_image"
+                                            class="pending-detail-image">
+                                    </a>
+
+
+
+                                </div>
+
+
+                                <div class="pending-detail-address flx">
+                                    <div class="pending-task-more-detail-lable">Task Address </div>:
+                                    <div class="pending-task-more-detail-field" id="completed_task_more_info_address">:
+                                        C-803
+                                        Blossom homes,
+                                        near abc circle, Mota Varachha,
+                                        Surat, Gujarat 394101, India</div>
+                                </div>
+                                <div class="pending-detail-mobile flx" id="">
+                                    <div class="pending-task-more-detail-lable">task payment status </div>:
+                                    <img src="#" alt="" style="margin: 5px;"
+                                        id="completed_task_more_info_agent_payment_status"
+                                        class="workboard-completed-page-expired-task-detail-gender">
+                                </div>
+                                <div class="pending-detail-mobile flx" id="">
+                                    <div class="pending-task-more-detail-lable">Task Accepted At </div>:
+                                    <div class="pending-task-more-detail-field"
+                                        id="completed_task_more_info_accepted_time">:today
+                                    </div>
+                                </div>
+                                <div class="pending-detail-mobile flx">
+                                    <div class="pending-task-more-detail-lable">Task completed At </div>:
+                                    <div class="pending-task-more-detail-field"
+                                        id="completed_task_more_info_completed_time">:today
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="pending-detail-container hidd" id="completed_user_info_page">
+
+                                <div class="pending-detail-name-container">
+                                    <div class="pending-detail-basic-naming-container">
+                                        <div class="pending-details-task-waiting-status flx">
+                                            <div class="pending-task-more-detail-lable">User Name </div>
+                                            <div class="pending-task-more-detail-field"
+                                                id="completed_task_more_info_user_name">
+                                                :Jaykit kukadiya</div>
+                                        </div>
+
+                                        <div class="pending-details-deadline flx">
+                                            <div class="pending-task-more-detail-lable">User Gender </div>
+                                            <div class="pending-task-more-detail-field"
+                                                id="completed_task_more_info_user_gender">
+                                                :Male</div>
+                                        </div>
+                                        <div class="pending-details-name flx">
+                                            <div class="pending-task-more-detail-lable">User Mobile</div>
+                                            <div class="pending-task-more-detail-field"
+                                                id="completed_task_more_info_user_mobile">:
+                                                7878444205</div>
+                                        </div>
+                                    </div>
+
+                                    <a href="" target="_blank" class="pending-detail-image-container"
+                                        id="completed_task_more_info_user_profile_image_link">
+                                        <!-- image  -->
+                                        <img src="" alt="" id="completed_task_more_info_user_profile_image"
+                                            class="pending-detail-image">
+                                    </a>
+                                </div>
+
+                            </div>
+                            <div class="pending-detail-container hidd" id="completed_location_info_page">
+
+                                <div class="pending-task-more-detail-gmap" id="completed_task_gmap_container">
+                                </div>
+
+                            </div>
+                            <div class="pending-task-update-inner-inner-container hidd"
+                                id="completed_payment_info_page">
+
+                                <div class="pending-detail-mobile flx">
+                                    <div class="pending-task-more-detail-lable">Payment status</div>:
+                                    <div class="pending-task-more-detail-field" id="">Success</div>
+                                </div>
+                                <div class="pending-detail-mobile flx">
+                                    <div class="pending-task-more-detail-lable">Payment Id</div>:
+                                    <div class="completed-task-more-detail-field" id="">
+                                        20210506111212800110168295102623134</div>
+                                </div>
+                                <div class="pending-detail-mobile flx">
+                                    <div class="pending-task-more-detail-lable">Payment mode</div>:
+                                    <div class="completed-task-more-detail-field" id="">Success</div>
+                                </div>
+                                <div class="pending-detail-mobile flx">
+                                    <div class="pending-task-more-detail-lable">Payment from</div>:
+                                    <div class="completed-task-more-detail-field" id="">name </div>
+                                </div>
+                                <div class="pending-detail-mobile flx">
+                                    <div class="pending-task-more-detail-lable">Payment Date</div>:
+                                    <div class="completed-task-more-detail-field" id="">Success</div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- message page -->
+            <div class="workboard-page-completed" id="workboard_page_messages">
+                <div class="dashboard-page-message-inner-container">
+                    <div class="message-body-container-no-selected" id="add_new_message_container">
+                        <div class="message-body-container-new-message-btn" id="add_new_message">New Message</div>
+                    </div>
+                    <div class="new-message-popup-container hidd" id="new_message_popup_container">
+                        <div class="new-message-add-box" id="new_message_popup">
+
+                            <!-- <div class="new-message-title">
+                                New Message
+                            </div> -->
+                            <div class="search_box">
+                                <div class="new-message-btn-container">
+                                    <input type="text" id="new_message_ac_search_taxt" placeholder="Enter Pincode or email or username"
+                                    class="new-message-ac-search-taxt">
+                                    <img src="{% static 'icon/search_btn.svg' %}" alt="" 
+                                    class="new-message-ac-search-btn">
+                                    <img src="{% static 'icon/search_arrow.svg' %}" alt="" id="new_message_ac_search_btn"
+                                    class="new-message-ac-search-arrow">
+                                </div>
+                            </div>
+                            <div class="new-message-empty-message-container" id="new_message_no_user">
+                                <p class="new-message-empty-message" id="new_message_box_message">No Users</p>
+                            </div>
+                            <div class="new-message-ac-indecator-container" id="new_message_ac_container">
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                    <div class="message-body-container hidd" id="message_body_container">
+
+                        <div class="message-body-header">
+                            <div class="message-header-first-part">
+                                <div class="message-header-user-state" id="message_receiver_state"></div>
+                                <p class="message-header-user-name" id="message_ac_name">jaykit kukadiya</p>
+                            </div>
+                            <div class="message-header-secound-part">
+                                <img class="message-header-more-img" src="{% static 'icon/3_dots.svg' %}" alt="">
+                            </div>
+
+                        </div>
+                        <div class="message-ac-container" >
+                            <div class="message-ac-inner-container" id="message_ac_container"></div>
+                            <!-- this is more options -->
+                            <div id="message-ac-detail-container" class="message-ac-inner-container-message-detail">
+                                <div id="message-ac-detail-box" class="message-ac-message-detail-btn-outer-container">
+                                   <p class="message-ac-messsage-detail-btn" id="message_detail_save">Save Message</p> 
+                                   <p class="message-ac-messsage-detail-btn" id="message_detail_reply">Reply Message</p> 
+                                   <p class="message-ac-messsage-detail-btn" id="message_detail_delete">Delete Message</p> 
+                                </div>
+                            </div>
+                        </div>
+                        <div class="message-body-footer">
+                            <input class="message-input" id="message_text" type="text" placeholder="Message" id="">
+                            <img class="message-send-btn" id="message_send_btn" src="{% static 'icon/send.svg' %}"
+                                alt="">
+                        </div>
+                    </div>
+
+                    <div class="message-sidemenu" id="message_sidemenu_conainer">
+                        <div class="message-body-container-no-selected-sidemenu hidd"
+                            id="add_new_message_container_inline">
+                            <div class="message-body-container-new-message-btn-sidemenu" id="add_new_message_inline">New
+                                Message</div>
+                        </div>
+                        {% for user_connection in user_connections %}
+                        {% if user_connection.user.id == request.user.id %}
+                        <div class="message-account-indecator" id="message_indecator_{{user_connection.connection.id}}">
+                            <img class="message-account-image"
+                                src="/media/{{user_connection.connection.extended_user_details.image}}" alt="none">
+                            <div class="message-indecator-detail-container">
+                                {% if user_connection.connection.first_name != "" %}
+                                <p class="message-indecator-field" id="message_indecator_name_{{user_connection.connection.id}}">{{user_connection.connection.first_name}}
+                                    {{user_connection.connection.last_name}}</p>
+                                {% else %}
+                                <p class="message-indecator-field" id="message_indecator_name_{{user_connection.connection.id}}">{{user_connection.connection.username}}</p>
+                                {% endif %}
+                                <p class="message-indecator-field" style="color: gray; font-size: small;">pincode :
+                                    {{user_connection.connection.extended_user_details.pincode}}</p>
+                            </div>
+                        </div>
+                        <script>
+                            message_details["user_ids"].push("{{user_connection.connection.id}}");
+                            document.getElementById("message_ac_container").innerHTML += `
+                            
+                            <div class="message-body-message-container hidd" id="message_outer_container_{{user_connection.connection.id}}">
+                                <div class="message-body-message-inner-container" id="message_inner_container_{{user_connection.connection.id}}">{{user_connection.connection.id}}
+                                </div>
+                            </div>
+
+                            `;
+                            
+                        </script>
+                        {% elif user_connection.connection.id == request.user.id %}
+                        <div class="message-account-indecator" id="message_indecator_{{user_connection.user.id}}">
+                            <img class="message-account-image"
+                                src="/media/{{user_connection.user.extended_user_details.image}}" alt="none">
+                            <div class="message-indecator-detail-container">
+                                {% if user_connection.user.first_name != "" %}
+                                <p class="message-indecator-field" id="message_indecator_name_{{user_connection.user.id}}">{{user_connection.user.first_name}}
+                                    {{user_connection.user.last_name}}</p>
+                                {% else %}
+                                <p class="message-indecator-field" id="message_indecator_name_{{user_connection.user.id}}">{{user_connection.connection.username}}</p>
+                                {% endif %}
+                                <p class="message-indecator-field" style="color: gray; font-size: small;">pincode :
+                                    {{user_connection.user.extended_user_details.pincode}}</p>
+                            </div>
+                        </div>
+                        <script>
+                            message_details["user_ids"].push("{{user_connection.user.id}}");
+                            document.getElementById("message_ac_container").innerHTML += `
+                            
+                            <div class="message-body-message-container hidd" id="message_outer_container_{{user_connection.user.id}}">
+                                <div class="message-body-message-inner-container" id="message_inner_container_{{user_connection.user.id}}">{{user_connection.user.id}}
+                                </div>
+                            </div>
+
+                            `;
+                        </script>
+
+                        {% endif %}
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+
+
+
+
+
+    <!-- this is activate while scroll is grater then some value and used to smooth scroll up -->
+    <div class="upbtn-container" id="backtohome">
+        <img class="upbtn" src="{% static 'icon/up.png' %}" alt="dsf">
+    </div>
+
+    <!-- this is short notification -->
+
+    <div class="noti-overlay" id="notificationbx">
+        <div class="notification-box" id="notif_name">
+            I am notification.
+        </div>
+    </div>
+
+    <div class="loading-dots-container" id="loading_rounder">
+        <img class="loading-dots-img" src="{% static 'icon/four_dots_loading.svg' %}" alt="">
+    </div>
+
+    <div class="lower-screen-resolution-notify">
+        please open website with minimum resolution of 1366 X 766<br>or<br>use desktop mode
+    </div>
+    <!-- <div class="noti-container" id="noti_container"></div> -->
+
+
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        setTimeout(() => {
+            location.href = "/dashboard";
+        }, 3000);
+    </script>
+</head>
+
+<body>
+
+    <div class="lower-screen-resolution-notify">
+        please open website with minimum resolution of 1366 X 766<br>or<br>use desktop mode
+    </div>
+
+    {{response}}
+    <div>
+        {% csrf_token %}
+        <h2>Payment status regarding your order Id {{response.ORDERID}}</h2>
+        {% if response.RESPCODE == '01' %}
+        ORDER SUCCESS
+        {% else %}
+        ORDER FAILURE
+        {% endif%}
+
+    </div>
+
+</body>
+
+</html>

@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment</title>
+    <link rel="stylesheet" href="{% static 'css/payment.css' %}">
+    <script>
+        deadline_timestemp = '{{payment_obj.task_detail_link.deadline}}';
+        payment_id = `{{payment_obj.id}}` ;
+        task_id = `{{payment_obj.task_detail_link.id}}` ;
+        gmap = String(`{{ payment_obj.task_detail_link.gmaplink|safe }}`);
+        console.log(gmap);
+    </script>
+    <script src="{% static 'js/payment.js' %}"></script>
+</head>
+
+<body>
+
+    {% csrf_token %}
+    
+    <div class="lower-screen-resolution-notify">
+        please open website with minimum resolution of 1366 X 766<br>or<br>use desktop mode
+    </div>
+
+    <div class="payment_info_outer_container">
+        <div class="payment_info_container">
+            <div style="width: 90%;">
+                <h1>verification</h1>
+                <h5>task id : {{ payment_obj.task_detail_link.id }}</h5>
+
+                <div class="field_container">
+                    <div class="lable_container">
+                        image :
+                    </div>
+                    <div class="detail_container">
+                        <a target="_blank" href="/media/{{payment_obj.task_detail_link.image}}">click hear</a>
+                    </div>
+                </div>
+                <div class="field_container">
+                    <div class="lable_container">
+                        full name :
+                    </div>
+                    <div class="detail_container">
+                        {{payment_obj.task_detail_link.name}}
+                    </div>
+                </div>
+                <div class="field_container">
+                    <div class="lable_container">
+                        address :
+                    </div>
+                    <div class="detail_container">
+                        {{payment_obj.task_detail_link.address}}
+                    </div>
+                </div>
+                <div class="field_container">
+                    <div class="lable_container">
+                        pincode :
+                    </div>
+                    <div class="detail_container">
+                        {{payment_obj.task_detail_link.pincode}}
+                    </div>
+                </div>
+                <div class="field_container">
+                    <div class="lable_container">
+                        mobile number :
+                    </div>
+                    <div class="detail_container">
+                        {{payment_obj.task_detail_link.mobile_number}}
+                    </div>
+                </div>
+                <div class="field_container">
+                    <div class="lable_container">
+                        proof :
+                    </div>
+                    <div class="detail_container">
+                        <a target="_blank" href="/media/{{payment_obj.task_detail_link.proof}}">click hear</a>
+                    </div>
+                </div>
+                <div class="field_container">
+                    <div class="lable_container">
+                        document :
+                    </div>
+                    <div class="detail_container">
+                        <a target="_blank" href="/media/{{payment_obj.task_detail_link.document}}">click hear</a>
+                    </div>
+                </div>
+                <div class="field_container">
+                    <div class="lable_container">
+                        deadline :
+                    </div>
+                    <div class="detail_container" id="task_deadline">
+                        {{payment_obj.task_detail_link.deadline}}
+                    </div>
+                </div>
+                <div class="field_container">
+                    <div class="lable_container">
+                        note :
+                    </div>
+                    <div class="detail_container">
+                        {{payment_obj.task_detail_link.note}}
+                    </div>
+                </div>
+                <div class="field_container">
+                    <div class="lable_container">
+                        gmaplink :
+                    </div>
+                    <div class="detail_container">
+                        <a target="_blank" href="#" id="gmaplink">click hear</a>
+                    </div>
+                </div>
+                <div class="btn_container">
+                    <div class="btn" id="verify">Verify Details</div>
+                    <div class="btn" id="discard" >discard</div>
+                </div>
+            </div>
+        </div>
+        <div class="task_detail_container">
+            <div style="width: 90%;">
+                <h1>Payment info</h1>
+                <h5>payment id : {{payment_obj.id}}</h5>
+                <div style="width: 80%;">
+                    <div class="field_container">
+                        <div class="lable_container">
+                            charge (INR):
+                        </div>
+                        <div class="detail_container">
+                            {{payment_obj.user_payment}} Only.
+                        </div>
+                    </div>
+                    <div class="field_container">
+                        <div class="lable_container">
+                            GST (18%):
+                        </div>
+                        <div class="detail_container" id="GST">
+                            ...
+                        </div>
+                    </div>
+                    <div class="field_container">
+                        <div class="lable_container">
+                            Total (INR):
+                        </div>
+                        <div class="detail_container" id="total_amount">
+                            ...
+                        </div>
+                        <script>
+                            document.getElementById("GST").innerText = Number({{ payment_obj.user_payment }}) * 0.18 + " Only";
+                            document.getElementById("total_amount").innerText = Number({{ payment_obj.user_payment }}) * 0.18 + Number({{ payment_obj.user_payment }}) + " Only";
+                        </script>
+                    </div>
+                    <div>Terms & condition</div>
+                    <div class="field_container">
+                        <div class="lable_container" style="width: 10%;">
+                            I
+                        </div>
+                        <div class="detail_container" id="total_amount" style="width: 80%">
+                            Once payment done it can not be refundable if canclellation is done from your side.
+                        </div>
+                    </div>
+                    <div class="field_container">
+                        <div class="lable_container" style="width: 10%;">
+                            II
+                        </div>
+                        <div class="detail_container" id="total_amount" style="width: 80%">
+                            If our Agent can not compleate tast in given time 90% of total amount(*GST amount can not
+                            refundable) is refendable and for this you have to verify your self at our site.
+                        </div>
+                    </div>
+                    <div class="field_container">
+                        <div class="lable_container" style="width: 10%;">
+                            III
+                        </div>
+                        <div class="detail_container" id="total_amount" style="width: 80%">
+                            If initial payment is fail due to some reason then detail of entire task will autometically
+                            destory.
+                        </div>
+                    </div>
+                    <div class="field_container">
+                        <div class="lable_container" style="width: 10%;">
+                            IV
+                        </div>
+                        <div class="detail_container" id="total_amount" style="width: 80%">
+                            If money id dedicated from bank but task not placed then fill free and contact us in help
+                            section.
+                        </div>
+                    </div>
+                    <div class="btn_container">
+                        <div class="btn" id="pay">Pay</div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="overlay" id="loading_box">
+        <div class="message_box" style="height: 144px;width: 302px;">
+            <div style="display: flex;justify-content: center; align-items: center; height: inherit; flex-direction: column;">
+                <div style="display: flex;justify-content: center; align-items: center;height: 80px;">
+                    <div class="divanim" style="border-color: red;"></div>
+                    <div class="divanim1" style="border-color: rgb(74, 218, 17);"></div>
+                    <div class="divanim2" style="border-color: rgb(0, 4, 255);"></div>
+                    <div class="divanim" style="border-color: rgb(255, 0, 242);"></div>
+                    <div class="divanim1" style="border-color: rgb(12, 255, 122);"></div>
+                </div>
+                <div class="messagebox_loading">
+                    loading..
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="overlay" id="success_box">
+        <div class="message_box" style="height: 144px;width: 302px;">
+            <div style="display: flex;justify-content: center; align-items: center; height: inherit; flex-direction: column;">
+                <div style="display: flex;justify-content: center; align-items: flex-end;height: 80px; margin: 5px 0px;">
+                    <div style="border-radius: 5px 5px 0px 5px; border: 9px solid black; padding: 0px 0px;height: 20px ;" ></div>
+                    <div  style="border-radius: 0px 5px 0px 0px;  border: 9px solid black; padding: 0px 0px;height:5px ;"></div>
+                    <div  style="border-radius: 5px 0px 0px 0px;  border: 9px solid black; padding: 0px 0px;height: 10px;"></div>
+                    <div style="border-radius: 5px 0px 0px 0px;  border: 9px solid black; padding: 0px 0px; height: 20px;"></div>
+                    <div  style="border-radius: 5px 5px 5px 0px;  border: 9px solid black; padding: 0px 0px;height: 30px;"></div>
+                </div>
+                <div class="messagebox_loading">
+                    woo hoo..
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="overlay" id="messsage_box">
+        <div class="message_box" style="height: 144px;width: 302px;">
+            <div style="display: flex;justify-content: center; align-items: center; height: inherit; flex-direction: column;" id="message_text">
+            </div>
+        </div>
+    </div>
+    <form action="https://securegw-stage.paytm.in/theia/processTransaction" method="POST" name="paytm">
+        {% for key, value in param_dict.items %}
+        <input type="hidden" name="{{key}}" value="{{value}}">
+        {% endfor %}
+</body>
+
+</html>
